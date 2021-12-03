@@ -10,6 +10,7 @@ import { useEffect } from "react";
 import { ethers } from "ethers";
 import requestAccounts from "utils/requestAccounts";
 import { useDispatch } from "react-redux";
+import { signedIn } from "store/reducers/accounts";
 
 const App = () => {
 
@@ -21,6 +22,9 @@ const App = () => {
       const accounts = await provider.listAccounts();
       if (accounts.length > 0) {
         requestAccounts(dispatch);
+      }
+      else {
+        dispatch(signedIn(false));
       }
     }
     fetchData();
