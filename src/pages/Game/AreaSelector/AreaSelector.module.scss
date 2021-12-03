@@ -3,23 +3,40 @@
   place-content: center;
   width: 100vw;
   height: 100vh;
+  overflow: hidden;
+
+  background: url("../../../assets/images/area-selector/bg.png");
+  background-size: cover;
+}
+
+.mapCropped {
+  max-width: 100%;
+  opacity: 0.4;
 }
 
 .map-container {
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
-    url("../../../assets/images/area-selector/big-map.png");
-
+  padding: 80px;
   background-repeat: no-repeat;
-  background-size: 100%;
   width: 1200px;
   height: 675px;
-  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
   position: relative;
 }
 
 .small-map {
   position: absolute;
-  width: calc((1200px / 1920px) * 317px);
-  inset: 50.4% 0 0 27.7%;
+  transform: scale(0.92);
+  left: 190px;
+  bottom: -20px;
   cursor: pointer;
+  transition: transform 0.2s;
+
+  &:hover {
+    transform: scale(1.2);
+    transition: transform 0.2s;
+  }
 }
