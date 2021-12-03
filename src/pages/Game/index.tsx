@@ -9,36 +9,33 @@ import styles from "./Game.module.scss";
 import { useSelector } from "react-redux";
 import Onboarding from "pages/Game/Onboarding";
 
-
 const Game = () => {
+  const accountState = useSelector((state: RootState) => state.account);
+  const { layout } = useSelector((state: RootState) => state.game);
 
-    const accountState = useSelector((state: RootState) => state.account);
-    const { layout } = useSelector((state: RootState) => state.game);
-
-    if (accountState.signedIn === false) {
-        return <Onboarding />
-    }
-    else if (accountState.signedIn === true) {
-      return (
-        <div className={clsnm(styles.container, styles.wrapper)}>
-          <div className={styles.game}>
-            <Base position="top" />
-            <div className={styles.boardWrapper}>
-              <Board />
-            </div>
-            <Base position="bottom" />
+  if (accountState.signedIn === false) {
+    return <Onboarding />;
+  } else if (accountState.signedIn === true) {
+    return (
+      <div className={clsnm(styles.container, styles.wrapper)}>
+        <div className={styles.game}>
+          <Base position="top" />
+          <div className={styles.boardWrapper}>
+            <Board />
           </div>
-          {layout === LAYOUT.collapsed && (
-            <div className={clsnm(styles.cards)}>
-              <div className={styles.card}>
-                <Card />
-              </div>
-            </div>
-          )}
+          <Base position="bottom" />
         </div>
-      );
-    }
-    return null;
+        {layout === LAYOUT.collapsed && (
+          <div className={clsnm(styles.cards)}>
+            <div className={styles.card}>
+              <Card />
+            </div>
+          </div>
+        )}
+      </div>
+    );
+  }
+  return null;
 };
 
 export default Game;

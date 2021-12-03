@@ -13,12 +13,14 @@ import { useDispatch } from "react-redux";
 import { signedIn } from "store/reducers/accounts";
 
 const App = () => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
     async function fetchData() {
-      const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
+      const provider = new ethers.providers.Web3Provider(
+        window.ethereum,
+        "any"
+      );
       const accounts = await provider.listAccounts();
       if (accounts.length > 0) {
         requestAccounts(dispatch);

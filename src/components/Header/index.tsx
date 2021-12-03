@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
 import requestAccounts from "utils/requestAccounts";
 
-
 const Header = () => {
   const ref = React.useRef<HTMLDivElement>(null);
   let navigate = useNavigate();
