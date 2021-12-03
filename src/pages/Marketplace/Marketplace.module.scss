@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  margin-top: var(--navbar-height);
+  padding: 12px 24px;
+}
+
+.cards {
+  display: grid;
+  margin-left: 32px;
+  padding: 1rem;
+  width: 75%;
+  overflow: auto;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 32px;
+  height: calc(100vh - var(--navbar-height) - 24px);
+  border: 1px solid var(--primary-600);
+  border-radius: 8px;
+}
+
+.card {
+  width: 100% !important;
+  height: 320px !important;
+}
+
+// Sort
+
+.sortWrapper {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 25%;
+  border-radius: 8px;
+  border: 1px solid var(--primary-600);
+  height: calc(100vh - var(--navbar-height) - 24px);
+  overflow: hidden;
+}
+
+@media (min-width: 0px) {
+  .sortWrapper {
+    display: none;
+  }
+}
+@media (min-width: 768px) {
+}
+@media (min-width: 992px) {
+  .sortWrapper {
+    display: inherit;
+  }
+}
