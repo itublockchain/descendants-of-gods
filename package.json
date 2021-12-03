@@ -27,7 +27,8 @@
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "lint": "npx prettier --check .",
-    "format": "npx prettier --write ."
+    "format": "npx prettier --write .",
+    "commit": "npx prettier --write . && git add ."
   },
   "husky": {
     "hooks": {

@@ -1,29 +1,29 @@
 .overlay {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    position: fixed;
-    display: flex;
-    top: 0;
-    left: 0;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
 }
 
 .modal {
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: 100vh;
+  position: fixed;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: 100vh;
 }
 
 .content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: 200px;
-    min-height: 100px;
-    background-color: white;
-    z-index: 1;
-    border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 200px;
+  min-height: 100px;
+  background-color: white;
+  z-index: 1;
+  border-radius: 8px;
 }

@@ -5,14 +5,14 @@ import styles from "./Landing.module.scss";
 import Ecosystem from "./Ecosystem/Ecosystem";
 
 const Landing = () => {
-    return (
-        <div className={styles.container}>
-            <Header />
-            <LandingHero />
-            <Ecosystem />
-            <Footer />
-        </div>
-    );
+  return (
+    <div className={styles.container}>
+      <Header />
+      <LandingHero />
+      <Ecosystem />
+      <Footer />
+    </div>
+  );
 };
 
 export default Landing;
