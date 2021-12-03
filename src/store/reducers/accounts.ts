@@ -2,7 +2,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState: any = {
-    signedIn: false
+    signedIn: null
 };
 
 
@@ -10,14 +10,14 @@ export const accountSlicer = createSlice({
     name: "accounts",
     initialState,
     reducers: {
-        signIn(state) {
-            state.signedIn = true;
+        signedIn(state, action) {
+            state.signedIn = action.payload;
         }
     }
 });
 
 export const {
-    signIn
+    signedIn
 } = accountSlicer.actions;
 
 export default accountSlicer.reducer;

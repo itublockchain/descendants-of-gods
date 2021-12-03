@@ -1,29 +1,30 @@
 .header {
-    display: flex;
-    position: fixed;
-    top: 0;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    width: 100%;
-    padding-top: 12px;
-    padding-bottom: 12px;
-    transition: background-color 0.15s linear;
+  display: flex;
+  position: fixed;
+  top: 0;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  width: 100%;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  transition: background-color 0.15s linear;
+  height: var(--navbar-height);
 
-    &.scrolled {
-        transition: background-color 0.15s linear;
-        background-color: var(--main-blue);
-    }
+  &.scrolled {
+    transition: background-color 0.15s linear;
+    background-color: var(--main-blue);
+  }
 }
 
 .menu {
-    display: flex;
+  display: flex;
 
-    & .connect {
-        margin-right: 12px;
-    }
+  & .connect {
+    margin-right: 12px;
+  }
 }
 
 .icon {
-    color: var(--primary-100);
+  color: var(--primary-100);
 }

@@ -4,38 +4,41 @@ import { DndProvider } from "react-dnd";
 import Game from "pages/Game";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Landing from "pages/Landing";
-import Snowfall from "react-snowfall";
-import React, { useEffect, useState } from "react";
+import Marketplace from "pages/Marketplace";
+import { useEffect } from "react";
+import requestAccount from "utils/requestAccounts";
+import { useDispatch } from "react-redux";
+import { signedIn } from "store/reducers/accounts";
 
 const App = () => {
-    const [snowfallHeight, setSnowfallHeight] = useState(0);
+  
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        const listener = () => {
-            setSnowfallHeight(document.body.offsetHeight);
-        };
-        document.addEventListener("DOMContentLoaded", listener);
+  useEffect(() => {
+    async function fetchData() {
+        const res = await requestAccount();
+        if (res) {
+          dispatch(signedIn(true));
+        }
+        else {
+          dispatch(signedIn(false));
+        }
+    }
 
-        return () => {
-            document.removeEventListener("DOMContentLoaded", listener);
-        };
-    }, []);
+    fetchData();
+  }, []);
 
-    console.log(document.body.offsetHeight);
-    return (
-        <DndProvider backend={HTML5Backend}>
-            <Snowfall
-                style={{ height: snowfallHeight || window.innerHeight }}
-                snowflakeCount={120}
-            />
-            <BrowserRouter>
-                <Routes>
-                    <Route path="/" element={<Landing />} />
-                    <Route path="/game" element={<Game />} />
-                </Routes>
-            </BrowserRouter>
-        </DndProvider>
-    );
+  return (
+    <DndProvider backend={HTML5Backend}>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Landing />} />
+          <Route path="/game" element={<Game />} />
+          <Route path="/market" element={<Marketplace />} />
+        </Routes>
+      </BrowserRouter>
+    </DndProvider>
+  );
 };
 
 export default App;

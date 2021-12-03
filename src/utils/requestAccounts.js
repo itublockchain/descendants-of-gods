@@ -1,10 +1,11 @@
 // @ts-ignore
 export default async function requestAccount() {
-    console.log(window);
     try {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const res = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        console.log(res);
+        return res;
     } catch (error) {
         console.error(error);
-        alert("Login to Metamask first");
+        return false;
     }
 }
