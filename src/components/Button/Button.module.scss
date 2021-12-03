@@ -1,0 +1,43 @@
+.container {
+    body:global(.light) & {
+    }
+}
+
+.button {
+    &.primary {
+        --bg: var(--primary-700);
+        --bg-hover: var(--primary-600);
+        --bg-active: var(--primary-500);
+    }
+
+    &.secondary {
+        --bg: var(--accent);
+        --bg-hover: var(--accent-hover);
+        --bg-active: var(--accent-active);
+    }
+
+    align-items: center;
+    display: flex;
+    background-color: var(--bg);
+
+    &:hover {
+        background-color: var(--bg-hover);
+    }
+
+    &:active {
+        background-color: var(--bg-active);
+    }
+
+    &.small {
+        padding: 8px 12px;
+    }
+    &.medium {
+        padding: 10px 14px;
+    }
+    &.large {
+        padding: 14px 20px;
+    }
+    &.xlarge {
+        padding: 18px 24px;
+    }
+}

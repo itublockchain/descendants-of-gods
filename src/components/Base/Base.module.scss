@@ -1,0 +1,17 @@
+.base {
+    position: absolute;
+    display: flex;
+    left: 50%;
+    transform: translateX(-50%);
+    &.top {
+        top: -30px;
+    }
+    &.bottom {
+        bottom: -30px;
+    }
+}
+
+.card {
+    margin-right: 12px;
+    margin-left: 12px;
+}

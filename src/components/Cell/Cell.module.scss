@@ -1,0 +1,43 @@
+$border: 2px solid white;
+
+.cell {
+    padding: 55px 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: $border;
+    border-right: none;
+    border-bottom: none;
+    user-select: none;
+
+    &.lastRow {
+        border-bottom: $border;
+    }
+
+    &.lastCol {
+        border-right: $border;
+    }
+
+    &.over {
+        background-color: yellow !important;
+        opacity: 0.5;
+    }
+
+    &.dropabble {
+        background-color: green;
+        opacity: 0.5;
+    }
+
+    &.border-top-left {
+        border-top-left-radius: 8px;
+    }
+    &.border-top-right {
+        border-top-right-radius: 8px;
+    }
+    &.border-bottom-left {
+        border-bottom-left-radius: 8px;
+    }
+    &.border-bottom-right {
+        border-bottom-right-radius: 8px;
+    }
+}
