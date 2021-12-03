@@ -15,11 +15,11 @@ const Game = () => {
     const accountState = useSelector((state: RootState) => state.account);
     const { layout } = useSelector((state: RootState) => state.game);
 
-    if (accountState.signedIn !== true) {
+    if (accountState.signedIn === false) {
         return <Onboarding />
     }
-
-    return (
+    else if (accountState.signedIn === true) {
+      return (
         <div className={clsnm(styles.container, styles.wrapper)}>
           <div className={styles.game}>
             <Base position="top" />
@@ -37,6 +37,8 @@ const Game = () => {
           )}
         </div>
       );
+    }
+    return null;
 };
 
 export default Game;

@@ -3,9 +3,16 @@ import { ReactComponent as ConnectIcon } from "assets/icons/basic/credit_card.sv
 import Icon from "components/Icon";
 import React from "react";
 import styles from "./Header.module.scss";
+import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { RootState } from "store";
+
 
 const Header = () => {
   const ref = React.useRef<HTMLDivElement>(null);
+  let navigate = useNavigate();
+
+  const account = useSelector((state: RootState) => state.account);
 
   /**
    * @brief Navbar background color transition
@@ -33,7 +40,7 @@ const Header = () => {
             <ConnectIcon />
           </Icon>
         </Button>
-        <Button onClick={() => null} type="secondary">
+        <Button onClick={() => navigate("/game")} type="secondary">
           Launch Game
         </Button>
       </div>

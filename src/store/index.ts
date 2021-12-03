@@ -10,6 +10,12 @@ export const store = configureStore({
         cards: cardSlicer,
         account: accounts,
     },
+    middleware: (getDefaultMiddleware) => {
+        const customizedMiddleware = getDefaultMiddleware({
+            serializableCheck: false
+        });
+        return customizedMiddleware;
+    }
 });
 
 export type RootState = ReturnType<typeof store.getState>;
