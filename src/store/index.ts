@@ -3,10 +3,10 @@ import { configureStore } from "@reduxjs/toolkit";
 import gameSlice from "store/reducers/game";
 
 export const store = configureStore({
-    reducer: {
-        game: gameSlice,
-        cards: cardSlicer,
-    },
+  reducer: {
+    game: gameSlice,
+    cards: cardSlicer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
