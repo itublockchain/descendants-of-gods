@@ -5,6 +5,7 @@ const initialState: any = {
   signedIn: null,
   provider: null,
   signer: null,
+  address: null,
 };
 
 export const accountSlicer = createSlice({
@@ -20,9 +21,19 @@ export const accountSlicer = createSlice({
     setSigner(state, action) {
       state.signer = action.payload;
     },
+    setAddress(state, action) {
+      state.address = action.payload;
+    },
+    setAccountData(state, action) {
+      const { address, provider, signedIn } = action.payload;
+      state.address = address;
+      state.provider = provider;
+      state.signedIn = signedIn;
+    },
   },
 });
 
-export const { signedIn, setProvider, setSigner } = accountSlicer.actions;
+export const { signedIn, setProvider, setSigner, setAddress, setAccountData } =
+  accountSlicer.actions;
 
 export default accountSlicer.reducer;
