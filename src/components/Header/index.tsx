@@ -37,12 +37,16 @@ const Header = () => {
     <header ref={ref} className={styles.header}>
       <div className={styles.logo}>Logo field</div>
       <div className={styles.menu}>
-        {account.signedIn === false && 
-          <Button onClick={() => requestAccounts(dispatch)} className={styles.connect}>
+        {account.signedIn === false && (
+          <Button
+            onClick={() => requestAccounts(dispatch)}
+            className={styles.connect}
+          >
             <Icon>
               <ConnectIcon />
             </Icon>
-          </Button>}
+          </Button>
+        )}
         <Button onClick={() => navigate("/game")} type="secondary">
           Launch Game
         </Button>

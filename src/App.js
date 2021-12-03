@@ -24,8 +24,7 @@ const App = () => {
       const accounts = await provider.listAccounts();
       if (accounts.length > 0) {
         requestAccounts(dispatch);
-      }
-      else {
+      } else {
         dispatch(signedIn(false));
       }
     }

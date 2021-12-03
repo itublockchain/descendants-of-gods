@@ -30,11 +30,6 @@
     "format": "npx prettier --write .",
     "commit": "npx prettier --write . && git add ."
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "npm run format && git add ."
-    }
-  },
   "eslintConfig": {
     "extends": [
       "react-app",
