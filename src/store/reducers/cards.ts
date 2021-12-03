@@ -1,12 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const CARDS = {
-  0: "Test 0",
-  1: "Test 1",
-  2: "Test 2",
-  3: "Test 3",
-  4: "Test 4",
-  5: "Test 5",
+export const CARD = {
+  "0": "WARRIOR",
+  "1": "ARCHER",
+  "2": "WIZARD",
+  "3": "HEALER",
+  "4": "TITAN",
 };
 
 type CardState = {
