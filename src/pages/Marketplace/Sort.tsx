@@ -6,9 +6,15 @@ import Input from "components/Input";
 import { ReactComponent as SearchIcon } from "assets/icons/edit/search.svg";
 import Typography from "components/Typography";
 import styles from "./Marketplace.module.scss";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "store";
+import { toggleSelect } from "store/reducers/markteplace";
+import { clsnm } from "utils/clsnm";
 
 const Sort = () => {
   const [value, setValue] = useState<string>("");
+  const { cards, selected } = useSelector((state: RootState) => state.market);
+  const dispatch = useDispatch();
 
   return (
     <div className={styles.sortWrapper}>
@@ -29,12 +35,17 @@ const Sort = () => {
       </Typography>
 
       <div className={styles.badges}>
-        <Badge className={styles.badge}>asfasfasfafs</Badge>
-        <Badge className={styles.badge}>asfafs</Badge>
-        <Badge className={styles.badge}>asfafs</Badge>
-        <Badge className={styles.badge}>asfasafs</Badge>
-        <Badge className={styles.badge}>asfasfafs</Badge>
-        <Badge className={styles.badge}>asfafsasfasf</Badge>
+        {cards.map((item) => (
+          <Badge
+            onClick={() => dispatch(toggleSelect(item))}
+            className={clsnm(
+              styles.badge,
+              selected?.includes(item) && styles.selected
+            )}
+          >
+            {item}
+          </Badge>
+        ))}
       </div>
     </div>
   );

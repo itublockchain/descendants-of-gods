@@ -1,29 +1,32 @@
-import { LAYOUT } from "common/constants/layout";
 import { createSlice } from "@reduxjs/toolkit";
+import { CARD } from "store/reducers/cards";
 
-type GameState = {
-  layout: LAYOUT.collapsed | LAYOUT.expanded;
-  table: {
-    rows: number;
-    columns: number;
-  };
+type MarketPlaceState = {
+  cards: string[];
+  selected: string[];
 };
 
-const initialState: GameState = {
-  layout: LAYOUT.collapsed,
-  table: {
-    rows: 5,
-    columns: 5,
-  },
+const initialState: MarketPlaceState = {
+  cards: ["Warrior", "Archer", "Wizard", "Healer", "Titan"],
+  selected: [],
 };
 
-export const gameSlice = createSlice({
-  name: "game",
+export const marketPlace = createSlice({
+  name: "market",
   initialState,
-  reducers: {},
+  reducers: {
+    toggleSelect: (state, action) => {
+      const payload = action.payload;
+      if (state.selected.includes(payload)) {
+        state.selected = state.selected.filter((item) => item != payload);
+      } else {
+        state.selected.push(payload);
+      }
+    },
+  },
 });
 
 // Action creators are generated for each case reducer function
-export const {} = gameSlice.actions;
+export const { toggleSelect } = marketPlace.actions;
 
-export default gameSlice.reducer;
+export default marketPlace.reducer;
