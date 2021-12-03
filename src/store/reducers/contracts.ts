@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const CONTRACTS = {
-  Token: "",
-  Game: "",
-  PlayerCard: "",
-  FXP: "",
-  FLASH: "",
-  BAORD: "",
-  MatchMaker: "",
+  Token: null,
+  Game: null,
+  PlayerCard: null,
+  FXP: null,
+  FLASH: null,
+  BAORD: null,
+  MatchMaker: null,
 };
 
 type ContractState = {

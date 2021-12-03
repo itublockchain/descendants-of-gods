@@ -8,34 +8,45 @@ import { clsnm } from "utils/clsnm";
 import styles from "./Game.module.scss";
 import { useSelector } from "react-redux";
 import Onboarding from "pages/Game/Onboarding";
+import { useState } from "react";
+import AreaSelector from "./AreaSelector";
 
 const Game = () => {
   const accountState = useSelector((state: RootState) => state.account);
   const { layout } = useSelector((state: RootState) => state.game);
 
+  const [areaSelected, setAreaSelected] = useState(false);
+
+  if (accountState.signedIn === null) {
+    return null;
+  }
+
   if (accountState.signedIn === false) {
     return <Onboarding />;
-  } else if (accountState.signedIn === true) {
-    return (
-      <div className={clsnm(styles.container, styles.wrapper)}>
-        <div className={styles.game}>
-          <Base position="top" />
-          <div className={styles.boardWrapper}>
-            <Board />
-          </div>
-          <Base position="bottom" />
-        </div>
-        {layout === LAYOUT.collapsed && (
-          <div className={clsnm(styles.cards)}>
-            <div className={styles.card}>
-              <Card />
-            </div>
-          </div>
-        )}
-      </div>
-    );
   }
-  return null;
+
+  if (!areaSelected) {
+    return <AreaSelector />;
+  }
+
+  return (
+    <div className={clsnm(styles.container, styles.wrapper)}>
+      <div className={styles.game}>
+        <Base position="top" />
+        <div className={styles.boardWrapper}>
+          <Board />
+        </div>
+        <Base position="bottom" />
+      </div>
+      {layout === LAYOUT.collapsed && (
+        <div className={clsnm(styles.cards)}>
+          <div className={styles.card}>
+            <Card />
+          </div>
+        </div>
+      )}
+    </div>
+  );
 };
 
 export default Game;
