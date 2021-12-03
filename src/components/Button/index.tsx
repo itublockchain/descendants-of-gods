@@ -39,7 +39,11 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         onClick={onClick}
         {...props}
       >
-        <Typography variant={variant} weight="medium">
+        <Typography
+          className="d-flex align-center"
+          variant={variant}
+          weight="medium"
+        >
           {children}
         </Typography>
       </button>
