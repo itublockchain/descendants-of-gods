@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Ecosystem.module.scss";
 import { ReactComponent as EcosystemImage } from "assets/images/landing/ecosystem.svg";
-import { useInView } from "react-intersection-observer";
 
 function Ecosystem() {
     return (
