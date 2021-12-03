@@ -3,12 +3,14 @@ import cardSlicer from "store/reducers/cards";
 import { configureStore } from "@reduxjs/toolkit";
 import contractSlice from "store/reducers/contracts";
 import gameSlice from "store/reducers/game";
+import markteplace from "store/reducers/markteplace";
 
 export const store = configureStore({
   reducer: {
     game: gameSlice,
     cards: cardSlicer,
     account: accounts,
+    market: markteplace,
   },
   middleware: (getDefaultMiddleware) => {
     const customizedMiddleware = getDefaultMiddleware({
