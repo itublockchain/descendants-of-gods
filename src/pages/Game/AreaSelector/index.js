@@ -1,11 +1,16 @@
 import styles from "./AreaSelector.module.scss";
-import BigImage from "assets/images/area-selector/big-map.png";
 import SmallImage from "assets/images/area-selector/small-map.png";
 
-function AreaSelector() {
+function AreaSelector({ setAreaSelected }) {
   return (
     <div className={styles.wrapper}>
-      <div className={styles["map-container"]}></div>
+      <div className={styles["map-container"]}>
+        <img
+          src={SmallImage}
+          className={styles["small-map"]}
+          onClick={() => setAreaSelected(true)}
+        />
+      </div>
     </div>
   );
 }
