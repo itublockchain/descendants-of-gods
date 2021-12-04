@@ -8,10 +8,10 @@ const LandingHero = () => {
 
   return (
     <div className={styles["hero-container"]}>
-      <h1>NFTs thrive here.</h1>
+      <h1>{/* NFTs thrive here. */}</h1>
       <p>
-        SuperFarm is a passionate community building at the intersection of NFTs
-        and DeFi.
+        {/*   SuperFarm is a passionate community building at the intersection of NFTs
+        and DeFi. */}
       </p>
       <Button
         achilles
