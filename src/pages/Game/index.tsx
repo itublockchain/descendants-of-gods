@@ -16,8 +16,9 @@ import { STAGES } from "store/reducers/game";
 
 const Game = () => {
   const accountState = useSelector((state: RootState) => state.account);
-  const { layout } = useSelector((state: RootState) => state.game);
-  const gameState = useSelector((state: RootState) => state.game);
+  const { layout, ...gameState } = useSelector(
+    (state: RootState) => state.game
+  );
 
   if (accountState.signedIn === null) {
     return null;
