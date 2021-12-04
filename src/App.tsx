@@ -6,9 +6,12 @@ import Landing from "pages/Landing";
 import Marketplace from "pages/Marketplace";
 import { useEffect } from "react";
 import useRequestAccounts from "hooks/useRequestAccounts";
+import { useSelector } from "react-redux";
+import { RootState } from "store";
 
 const App = () => {
   const { requestAccounts } = useRequestAccounts();
+  const { GodContract } = useSelector((state: RootState) => state.contracts);
 
   useEffect(() => {
     async function fetchData() {

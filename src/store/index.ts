@@ -11,6 +11,7 @@ export const store = configureStore({
     cards: cardSlicer,
     account: accounts,
     market: markteplace,
+    contracts: contractSlice,
   },
   middleware: (getDefaultMiddleware) => {
     const customizedMiddleware = getDefaultMiddleware({

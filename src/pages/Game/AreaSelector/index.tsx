@@ -16,11 +16,8 @@ function AreaSelector({ areaSelected, setAreaSelected }: AreaSelectorProps) {
     const el = ref?.current;
 
     if (el) {
-      if (Array.from(el.classList).includes?.(styles.animation)) {
-        el.classList.remove(styles.animation);
-      } else {
-        el.classList.add(styles.animation);
-      }
+      el.classList.toggle(styles.animation);
+      setTimeout(() => setAreaSelected(true), 2000);
     }
   };
 
