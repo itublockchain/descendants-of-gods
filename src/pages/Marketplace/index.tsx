@@ -16,9 +16,21 @@ const Marketplace = () => {
 
   useEffect(() => {
     if (!MarketplaceContract) return;
+    // asset === 0 => arena
+    // asset === 1 => card
+
+    // token === 0 => sons
+    // token === 1 => biLira
     async function fetchData() {
       try {
-        const res = await MarketplaceContract.getAllListings();
+        const res = await MarketplaceContract.getAllListings().then(
+          (res: any) => {
+            return res.map((item: any) => ({
+              ...item,
+              assetId: item.assetId.toNumber()
+            }));
+          }
+        );
         setListings(res);
         console.log(res);
       } catch (err) {

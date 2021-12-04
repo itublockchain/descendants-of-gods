@@ -1,15 +1,16 @@
 .card {
   background-color: white;
-  border-radius: 8px;
+  border-radius: 4px;
   height: 300px;
   width: 250px;
+  background-size: contain;
 
   transition: transform 0.5s;
   user-select: none;
 
   &.collapsed {
-    width: 70px;
-    height: 110px;
+    width: 90px;
+    height: 120px;
   }
   &.rotate {
     transform: rotateZ(20deg);

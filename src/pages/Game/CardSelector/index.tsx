@@ -3,7 +3,7 @@ import Typography from "components/Typography";
 import { Slot } from "pages/Game/CardSelector/Slot";
 import Button from "components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { setStage, STAGES } from "store/reducers/game";
+import { setSelectedCards, setStage, STAGES } from "store/reducers/game";
 import { RootState } from "store";
 import { Fragment, useEffect, useState } from "react";
 import CardWrapper from "components/CardWrapper";
@@ -11,6 +11,7 @@ import CardWrapper from "components/CardWrapper";
 function CardSelector() {
   const { GodContract } = useSelector((state: RootState) => state.contracts);
   const { signer } = useSelector((state: RootState) => state.account);
+  //const { selectedCards } = useSelector((state: RootState) => state.game);
   const dispatch = useDispatch();
   const [cards, setCards] = useState([]);
   const [oldCards, setOldCards] = useState([]);
@@ -30,6 +31,10 @@ function CardSelector() {
     }
     fetchData();
   }, [GodContract, signer]);
+
+  useEffect(() => {
+    dispatch(setSelectedCards(selectedDeck));
+  }, [selectedDeck]);
 
   return (
     <div className={styles.wrapper}>

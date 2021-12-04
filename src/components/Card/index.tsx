@@ -11,6 +11,7 @@ type CardProps = {
   rotate?: boolean;
   draggable?: boolean;
   index?: number;
+  style?: any;
 };
 
 const Card = ({
@@ -19,6 +20,7 @@ const Card = ({
   rotate,
   draggable,
   index,
+  style,
   ...rest
 }: CardProps) => {
   const { layout } = useSelector((state: RootState) => state.game);
@@ -35,6 +37,7 @@ const Card = ({
   return (
     <div
       ref={isDraggable ? drag : null}
+      style={style}
       className={clsnm(
         styles.card,
         layout === LAYOUT.collapsed && styles.collapsed,
