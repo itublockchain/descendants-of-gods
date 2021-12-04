@@ -4,8 +4,6 @@ import { useDispatch } from "react-redux";
 import { setAccountData, signedIn } from "store/reducers/accounts";
 import {
   godABI,
-  boardABI,
-  flashABI,
   marketplaceABI,
   matchMakerABI,
   arenaABI,
@@ -94,16 +92,6 @@ export default function useRequestAccounts() {
         xpABI,
         provider
       );
-
-      MatchMakerContract.on("WaitingLeave", () => {
-        dispatch(setStage(STAGES.SelectMap));
-      });
-
-      MatchMakerContract.on("GameStarted", (_, __) => {
-        console.log("game started");
-
-        dispatch(setStage(STAGES.InGame));
-      });
 
       dispatch(
         setAccountData({

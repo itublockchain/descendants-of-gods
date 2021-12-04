@@ -19,9 +19,23 @@ function Matching({ setIsMatched }: any) {
     (state: RootState) => state.contracts
   );
 
+  const dispatch = useDispatch();
   const leaveGame = async () => {
     await MatchMakerContract.connect(signer).leaveGame(1);
   };
+
+  useEffect(() => {
+    if (MatchMakerContract) {
+      MatchMakerContract.on("WaitingLeave", () => {
+        dispatch(setStage(STAGES.SelectMap));
+      });
+    }
+    if (MatchMakerContract) {
+      MatchMakerContract.on("GameStarted", () => {
+        dispatch(setStage(STAGES.InGame));
+      });
+    }
+  }, [MatchMakerContract]);
 
   return (
     <div className={styles.wrapper}>
