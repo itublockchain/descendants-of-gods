@@ -5,6 +5,8 @@ import Card1 from "assets/cards/card1.png";
 import Card2 from "assets/cards/card2.png";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
+import Typography from "components/Typography";
+import Button from "components/Button";
 
 function Matching({ setIsMatched }: any) {
   const hintRef: any = useRef();
@@ -31,9 +33,15 @@ function Matching({ setIsMatched }: any) {
       <div className={styles.container}>
         <img src={Card1} className={styles["first-image"]} />
         <img src={Card2} className={styles["second-image"]} />
-        <span className={styles.hint} ref={hintRef}>
-          Merhaba dünya
-        </span>
+        <Typography
+          variant="title4"
+          weight="medium"
+          className={styles.hint}
+          ref={hintRef}
+        >
+          Waiting another player to join
+          <Button className={styles.button}>Leave the queue</Button>
+        </Typography>
         <div className={styles["progress-bar--wrapper"]}>
           <div className={styles["progress-bar"]}></div>
         </div>
