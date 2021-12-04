@@ -14,13 +14,6 @@ function Matching({ setIsMatched }: any) {
   const { signer, address: signerAddress } = useSelector(
     (state: RootState) => state.account
   );
-  const { MatchMakerContract } = useSelector(
-    (state: RootState) => state.contracts
-  );
-
-  MatchMakerContract.on("GameStarted", () => {
-    console.log("hello");
-  });
 
   return (
     <div className={styles.wrapper}>

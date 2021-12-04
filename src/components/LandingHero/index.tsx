@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
 
 const LandingHero = () => {
-  let navigate = useNavigate();
   const dispatch = useDispatch();
 
   const { MatchMakerContract } = useSelector(
@@ -18,20 +17,6 @@ const LandingHero = () => {
     (state: RootState) => state.account
   );
 
-  const joinMatch = async () => {
-    if (MatchMakerContract) {
-      const [isPlayerInBoard, address] = await MatchMakerContract.arenaToPlayer(
-        1
-      );
-
-      console.log(address, signerAddress, isPlayerInBoard);
-
-      if (isPlayerInBoard && address === signerAddress) {
-        dispatch(setStage(STAGES.MatchPlayers));
-      }
-    }
-  };
-
   return (
     <div className={styles["hero-container"]}>
       <h1>NFTs thrive here.</h1>
@@ -39,12 +24,7 @@ const LandingHero = () => {
         SuperFarm is a passionate community building at the intersection of NFTs
         and DeFi.
       </p>
-      <Button
-        achilles
-        onClick={async () => await joinMatch()}
-        type="secondary"
-        size="large"
-      >
+      <Button achilles type="secondary" size="large">
         Launch Game
       </Button>
     </div>

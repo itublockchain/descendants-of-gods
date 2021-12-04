@@ -20,7 +20,6 @@ const Base = ({ position, player }: BaseProps) => {
     <div className={clsnm(styles.base, styles[position])}>
       {position === "bottom" &&
         selectedCards.map((item: any) => {
-          console.log(item);
           if (item === -1) {
             return <></>;
           }
