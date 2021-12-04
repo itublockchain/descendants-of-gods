@@ -80,17 +80,22 @@ function CardSelector() {
       );
       joinMatchReq.exec();
     } else {
-      if (address !== signerAddress) {
-        dispatch(setStage(STAGES.InGame));
-      } else {
-        dispatch(setStage(STAGES.MatchPlayers));
-      }
+      dispatch(setStage(STAGES.MatchPlayers));
     }
   };
 
   useEffect(() => {
     dispatch(setSelectedCards(selectedDeck));
   }, [selectedDeck]);
+
+  useEffect(() => {
+    if (MatchMakerContract) {
+      MatchMakerContract.on("WaitingLeave", () => {
+        console.log("leave");
+        dispatch(setStage(STAGES.SelectMap));
+      });
+    }
+  }, [MatchMakerContract]);
 
   return (
     <div className={styles.wrapper}>

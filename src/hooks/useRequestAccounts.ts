@@ -15,6 +15,7 @@ import {
 } from "abi";
 import { setContractData } from "store/reducers/contracts";
 import { checkIfRightNetwork } from "utils/checkIfRightNetwork";
+import { setStage, STAGES } from "store/reducers/game";
 
 interface WindowInterface {
   ethereum: any;
@@ -93,6 +94,10 @@ export default function useRequestAccounts() {
         xpABI,
         provider
       );
+
+      MatchMakerContract.on("WaitingLeave", (gameId: any) => {
+        dispatch(setStage(STAGES.SelectMap));
+      });
 
       dispatch(
         setAccountData({

@@ -16,38 +16,24 @@ function Matching({ setIsMatched }: any) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { provider, signer, address } = useSelector(
-    (state: RootState) => state.account
-  );
+  const { signer } = useSelector((state: RootState) => state.account);
   const { MatchMakerContract, SonsContract } = useSelector(
     (state: RootState) => state.contracts
   );
 
-  useState(() => {
-    const listener = () => {
-      setIsMatched(true);
-    };
-    provider.on("GameStarted", listener);
-
-    return () => {
-      provider.off("GameStarted", listener);
-    };
-  });
-
   useEffect(() => {
-    MatchMakerContract.on("GameStarted", (gameId: any) => {
-      dispatch(setStage(STAGES.InGame));
-      navigate(`/game/${gameId}`);
-    });
+    if (MatchMakerContract) {
+      MatchMakerContract.on("GameStarted", (gameId: any) => {
+        console.log("hello");
+
+        dispatch(setStage(STAGES.InGame));
+        navigate(`/game/${gameId}`);
+      });
+    }
   }, [MatchMakerContract]);
 
   const leaveGame = async () => {
     await MatchMakerContract.connect(signer).leaveGame(1);
-    /*    await SonsContract.connect(signer).transferFrom(
-      MatchMakerContract.address,
-      address,
-      await SonsContract.allowance(MatchMakerContract.address, address)
-    ); */
   };
 
   return (
@@ -65,7 +51,6 @@ function Matching({ setIsMatched }: any) {
           <Button
             onClick={async () => {
               await leaveGame();
-              dispatch(setStage(STAGES.SelectMap));
             }}
             size="large"
             className={styles.button}
