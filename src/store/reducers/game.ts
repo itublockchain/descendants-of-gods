@@ -15,6 +15,7 @@ type GameState = {
     columns: number;
   };
   selectedCards: Array<any>;
+  enemyCards: Array<any>;
   stage: STAGES;
 };
 
@@ -25,6 +26,7 @@ const initialState: GameState = {
     columns: 5
   },
   selectedCards: [],
+  enemyCards: [],
   stage: STAGES.SelectMap
 };
 
@@ -38,11 +40,14 @@ export const gameSlice = createSlice({
     },
     setSelectedCards(state, action) {
       state.selectedCards = action.payload;
+    },
+    setEnemyCards(state, action) {
+      state.enemyCards = action.payload;
     }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { setStage, setSelectedCards } = gameSlice.actions;
+export const { setStage, setSelectedCards, setEnemyCards } = gameSlice.actions;
 
 export default gameSlice.reducer;

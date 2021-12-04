@@ -6,19 +6,32 @@ import { LAYOUT } from "common/constants/layout";
 import { RootState } from "store";
 import { clsnm } from "utils/clsnm";
 import styles from "./Game.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Onboarding from "pages/Game/Onboarding";
 import { useEffect, useState } from "react";
 import AreaSelector from "pages/Game/AreaSelector";
 import Matching from "./Matching";
 import CardSelector from "./CardSelector";
-import { STAGES } from "store/reducers/game";
+import { setEnemyCards, STAGES } from "store/reducers/game";
 
 const Game = () => {
   const accountState = useSelector((state: RootState) => state.account);
   const { layout, ...gameState } = useSelector(
     (state: RootState) => state.game
   );
+  const { ClashContract } = useSelector((state: RootState) => state.contracts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!ClashContract) return;
+
+    async function fetchData() {
+      const res = await ClashContract.getEnemyDeck();
+      console.log("enemy cards:", res);
+      dispatch(setEnemyCards(res));
+    }
+    fetchData();
+  }, [ClashContract]);
 
   if (accountState.signedIn === null) {
     return null;
