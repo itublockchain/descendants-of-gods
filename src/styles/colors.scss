@@ -1,8 +1,13 @@
 :root {
-  --main-blue: #dfb099;
-  --accent: #c14641;
-  --accent-hover: #d04c47;
-  --accent-active: #e35d57;
+  --main-blue: rgb(58, 28, 10);
+  --accent: rgb(12, 53, 26);
+  --accent-hover: #d3a791;
+  --accent-grad: linear-gradient(
+    180deg,
+    rgba(180, 55, 50, 1) 0%,
+    rgba(126, 58, 55, 1) 100%
+  );
+  --accent-active: #c2957f;
   --primary-100: #dee3ea;
   --primary-200: #b2bdcd;
   --primary-300: #5d7290;
@@ -11,6 +16,6 @@
   --primary-700: #242c37;
   --primary-800: #151a21;
   --primary-900: #0b0e11;
-  --text-color: var(--primary-700);
+  --text-color: var(--primary-100);
   --main-color: var(--primary-100);
 }

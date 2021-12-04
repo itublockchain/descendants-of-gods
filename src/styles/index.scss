@@ -4,6 +4,17 @@
 
 :root {
   --navbar-height: 64px;
+  --achilles: "Achilles", sans-serif;
+  --headings: "Poppins", sans-serif;
+}
+
+@font-face {
+  font-family: "Achilles";
+  src: url(./achilles.otf);
+}
+
+.achilles {
+  font-family: var(--achilles);
 }
 
 * {
@@ -13,7 +24,7 @@
   border: none;
   background: transparent;
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: var(--headings);
 
   &::-webkit-scrollbar-track {
     background-color: transparent;
@@ -28,7 +39,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: var(--primary-300);
+    background-color: var(--primary-200);
     width: 6px;
     border-radius: 8px;
     transition: 100ms linear opacity;
@@ -51,8 +62,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--main-blue);
-  color: rgba(255, 255, 255, 0.87);
+  background-image: url("../assets/images/landing/background-test.jpeg");
+  background-size: cover;
 }
 
 code {

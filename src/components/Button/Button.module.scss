@@ -8,18 +8,21 @@
     --bg: var(--primary-700);
     --bg-hover: var(--primary-600);
     --bg-active: var(--primary-500);
+    --color: var(--text-color);
   }
 
   &.secondary {
-    --bg: var(--accent);
-    --bg-hover: var(--accent-hover);
-    --bg-active: var(--accent-active);
+    --bg: var(--accent-grad);
+    --bg-hover: var(--accent-grad);
+    --bg-active: var(--accent-grad);
+    --color: var(--text-color);
   }
 
   align-items: center;
   display: flex;
   justify-content: center;
-  background-color: var(--bg);
+  background: var(--bg);
+  color: var(--color);
 
   &:hover {
     background-color: var(--bg-hover);

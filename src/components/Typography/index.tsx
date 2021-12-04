@@ -21,6 +21,7 @@ type TypographyOwnProps = {
   variant: TypographyVariants;
   weight?: TypographyWeights;
   decor?: "underline";
+  achilles?: boolean;
 };
 
 type TypographyProps = TypographyOwnProps &
@@ -34,6 +35,7 @@ const Typography = React.forwardRef((props: TypographyProps, ref) => {
     as: Component = "span",
     className,
     children,
+    achilles,
     ...rest
   } = props;
 
@@ -44,6 +46,7 @@ const Typography = React.forwardRef((props: TypographyProps, ref) => {
         styles[variant],
         styles[`${weight}`],
         styles[`${decor}`],
+        achilles && "achilles",
         className
       )}
       {...rest}

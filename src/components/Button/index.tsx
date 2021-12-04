@@ -10,6 +10,7 @@ type ButtonProps = {
   children: ReactNode;
   size?: "small" | "medium" | "large" | "xlarge";
   type?: "primary" | "secondary";
+  achilles?: boolean;
 };
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -20,6 +21,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       size = "medium",
       type = "primary",
+      achilles,
       ...props
     }: ButtonProps,
     ref
@@ -40,6 +42,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         <Typography
+          achilles={achilles}
           className="d-flex align-center"
           variant={variant}
           weight="medium"

@@ -4,17 +4,26 @@ import { useDispatch } from "react-redux";
 import { setAccountData, signedIn } from "store/reducers/accounts";
 import { godABI, boardABI, flashABI, marketplaceABI } from "abi";
 import { setContractData } from "store/reducers/contracts";
+import { checkIfRightNetwork } from "utils/checkIfRightNetwork";
 
 interface WindowInterface {
   ethereum: any;
 }
 declare const window: Window & WindowInterface;
 
+const AVALANCHE_NETWORK = {
+  id: "0xa869",
+  name: "Avalanche Fuji C Chain",
+  rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
+  nativeCurrency: { name: "AVAX", decimals: 18, symbol: "AVAX" },
+};
+
 export default function useRequestAccounts() {
   const dispatch = useDispatch();
 
   const requestAccounts = async () => {
     try {
+      await checkIfRightNetwork(AVALANCHE_NETWORK);
       const provider = new ethers.providers.Web3Provider(
         window.ethereum,
         "any"

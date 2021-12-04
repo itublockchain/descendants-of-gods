@@ -16,9 +16,13 @@ const Marketplace = () => {
   useEffect(() => {
     if (!MarketplaceContract) return;
     async function fetchData() {
-      const res = await MarketplaceContract.getAllListings();
-      console.log("Marketplace items:", res);
-      setListings(res);
+      try {
+        const res = await MarketplaceContract.getAllListings();
+        setListings(res);
+        console.log(res);
+      } catch (err) {
+        console.log({ err });
+      }
     }
     fetchData();
   }, [MarketplaceContract]);

@@ -30,3 +30,21 @@
   color: var(--primary-100);
   margin-right: 8px;
 }
+
+.logoWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.links {
+  margin-left: 80px;
+}
+
+.link {
+  color: var(--text-color);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}

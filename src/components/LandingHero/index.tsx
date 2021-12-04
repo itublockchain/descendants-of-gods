@@ -13,7 +13,12 @@ const LandingHero = () => {
         SuperFarm is a passionate community building at the intersection of NFTs
         and DeFi.
       </p>
-      <Button onClick={() => navigate("/game")} type="secondary" size="large">
+      <Button
+        achilles
+        onClick={() => navigate("/game")}
+        type="secondary"
+        size="large"
+      >
         Launch Game
       </Button>
     </div>

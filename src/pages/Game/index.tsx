@@ -43,7 +43,7 @@ const Game = () => {
         </div>
         <Base position="bottom" />
       </div>
-      {layout === LAYOUT.collapsed && (
+      {layout === LAYOUT.expanded && (
         <div className={clsnm(styles.cards)}>
           <div className={styles.card}>
             <Card />
