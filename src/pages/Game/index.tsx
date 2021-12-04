@@ -8,7 +8,7 @@ import { clsnm } from "utils/clsnm";
 import styles from "./Game.module.scss";
 import { useSelector } from "react-redux";
 import Onboarding from "pages/Game/Onboarding";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AreaSelector from "pages/Game/AreaSelector";
 import Matching from "./Matching";
 import CardSelector from "./CardSelector";
@@ -16,8 +16,9 @@ import { STAGES } from "store/reducers/game";
 
 const Game = () => {
   const accountState = useSelector((state: RootState) => state.account);
-  const { layout } = useSelector((state: RootState) => state.game);
-  const gameState = useSelector((state: RootState) => state.game);
+  const { layout, ...gameState } = useSelector(
+    (state: RootState) => state.game
+  );
 
   if (accountState.signedIn === null) {
     return null;

@@ -3,7 +3,7 @@ import Typography from "components/Typography";
 import { Slot } from "pages/Game/CardSelector/Slot";
 import Button from "components/Button";
 import { useDispatch, useSelector } from "react-redux";
-import { setStage, STAGES } from "store/reducers/game";
+import { setSelectedCards, setStage, STAGES } from "store/reducers/game";
 import { RootState } from "store";
 import { Fragment, useEffect, useState } from "react";
 import CardWrapper from "components/CardWrapper";
@@ -87,6 +87,10 @@ function CardSelector() {
       }
     }
   };
+
+  useEffect(() => {
+    dispatch(setSelectedCards(selectedDeck));
+  }, [selectedDeck]);
 
   return (
     <div className={styles.wrapper}>

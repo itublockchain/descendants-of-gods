@@ -35,11 +35,14 @@ export const gameSlice = createSlice({
     setStage(state, action) {
       const payload = action.payload;
       state.stage = payload;
+    },
+    setSelectedCards(state, action) {
+      state.selectedCards = action.payload;
     }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { setStage } = gameSlice.actions;
+export const { setStage, setSelectedCards } = gameSlice.actions;
 
 export default gameSlice.reducer;
