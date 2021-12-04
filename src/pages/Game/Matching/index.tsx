@@ -1,8 +1,8 @@
 // @ts-ignore
 import React, { useRef, useState } from "react";
 import styles from "./Matching.module.scss";
-import Card1 from "assets/cards/card1.png";
-import Card2 from "assets/cards/card2.png";
+import Card1 from "assets/cards/Warrior.png";
+import Card2 from "assets/cards/Archer.png";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
 import Typography from "components/Typography";
@@ -22,7 +22,6 @@ function Matching({ setIsMatched }: any) {
     const listener = () => {
       setIsMatched(true);
     };
-
     provider.on("GameStarted", listener);
 
     return () => {

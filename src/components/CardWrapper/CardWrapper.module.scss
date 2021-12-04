@@ -10,3 +10,14 @@
   background-size: cover;
   background-color: white;
 }
+
+.draggable {
+  cursor: grab;
+  &:active {
+    opacity: 0.8;
+  }
+}
+
+.invisible {
+  opacity: 0;
+}

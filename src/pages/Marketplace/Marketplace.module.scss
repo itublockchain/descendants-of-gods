@@ -6,12 +6,13 @@
 
 .cards {
   display: grid;
+  grid-template-columns: repeat(auto-fill, 1fr);
   margin-left: 32px;
+  flex-wrap: wrap;
   padding: 1rem;
-  width: 75%;
+
   overflow: auto;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  gap: 32px;
+  gap: 12px;
   height: calc(100vh - var(--navbar-height) - 24px);
   border: 1px solid var(--accent-active);
   border-radius: 8px;
@@ -19,7 +20,10 @@
 
 .card {
   width: 100% !important;
-  height: 320px !important;
+}
+
+.cardWrapper {
+  height: fit-content;
 }
 
 // Sort

@@ -10,6 +10,7 @@ type CardProps = {
   hoverable?: boolean;
   rotate?: boolean;
   draggable?: boolean;
+  index?: number;
 };
 
 const Card = ({
@@ -17,6 +18,7 @@ const Card = ({
   hoverable,
   rotate,
   draggable,
+  index,
   ...rest
 }: CardProps) => {
   const { layout } = useSelector((state: RootState) => state.game);

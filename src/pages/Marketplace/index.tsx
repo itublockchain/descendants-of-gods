@@ -6,6 +6,7 @@ import { Sort } from "pages/Marketplace/Sort";
 import styles from "./Marketplace.module.scss";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
+import CardWrapper from "components/CardWrapper";
 
 const Marketplace = () => {
   const { MarketplaceContract } = useSelector(
@@ -33,8 +34,13 @@ const Marketplace = () => {
       <div className={styles.container}>
         <Sort />
         <div className={styles.cards}>
-          {listings.map((item) => {
-            return <Card />;
+          {listings.map((item, index) => {
+            return (
+              <Fragment>
+                <CardWrapper className={styles.cardWrapper} key={index} />
+                <CardWrapper className={styles.cardWrapper} key={index} />
+              </Fragment>
+            );
           })}
         </div>
       </div>
