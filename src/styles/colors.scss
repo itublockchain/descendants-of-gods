@@ -1,5 +1,5 @@
 :root {
-  --main-blue: rgb(12, 5, 26);
+  --main-blue: #dfb099;
   --accent: #c14641;
   --accent-hover: #d04c47;
   --accent-active: #e35d57;
@@ -11,6 +11,6 @@
   --primary-700: #242c37;
   --primary-800: #151a21;
   --primary-900: #0b0e11;
-  --text-color: var(--primary-100);
+  --text-color: var(--primary-700);
   --main-color: var(--primary-100);
 }

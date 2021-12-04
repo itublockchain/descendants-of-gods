@@ -5,19 +5,19 @@ import Icon from "components/Icon";
 import React from "react";
 import styles from "./Header.module.scss";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { RootState } from "store";
-import requestAccounts from "utils/requestAccounts";
+import useRequestAccounts from "hooks/useRequestAccounts";
 
 const Header = () => {
   const ref = React.useRef<HTMLDivElement>(null);
   let navigate = useNavigate();
-
   const { signedIn, address } = useSelector(
     (state: RootState) => state.account
   );
+  const length = address?.length;
 
-  const dispatch = useDispatch();
+  const { requestAccounts }: any = useRequestAccounts();
 
   /**
    * @brief Navbar background color transition
@@ -42,7 +42,7 @@ const Header = () => {
       <div className={styles.menu}>
         {signedIn === false ? (
           <Button
-            onClick={() => requestAccounts(dispatch)}
+            onClick={async () => await requestAccounts()}
             className={styles.connect}
           >
             <Icon>
@@ -54,7 +54,10 @@ const Header = () => {
             <Icon className={styles.icon}>
               <UserIcon />
             </Icon>
-            <span>{address?.substring(0, 10)}...</span>
+            <span>
+              {address?.substring(0, 5)}...
+              {address?.substring(length - 5, length)}
+            </span>
           </Button>
         )}
         <Button onClick={() => navigate("/game")} type="secondary">

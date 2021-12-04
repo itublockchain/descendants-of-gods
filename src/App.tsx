@@ -1,32 +1,18 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-// @ts-ignore
 import { DndProvider } from "react-dnd";
 import Game from "pages/Game";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import Landing from "pages/Landing";
 import Marketplace from "pages/Marketplace";
 import { useEffect } from "react";
-import { ethers } from "ethers";
-import requestAccounts from "utils/requestAccounts";
-import { useDispatch } from "react-redux";
-import { signedIn } from "store/reducers/accounts";
+import useRequestAccounts from "hooks/useRequestAccounts";
 
 const App = () => {
-  const dispatch = useDispatch();
+  const { requestAccounts } = useRequestAccounts();
 
   useEffect(() => {
     async function fetchData() {
-      const provider = new ethers.providers.Web3Provider(
-        window.ethereum,
-        "any"
-      );
-      const accounts = await provider.listAccounts();
-      if (accounts.length > 0) {
-        requestAccounts(dispatch);
-      } else {
-        dispatch(signedIn(false));
-      }
+      await requestAccounts();
     }
     fetchData();
   }, []);

@@ -1,18 +1,15 @@
 // @ts-ignore
 import styles from "./Onboarding.module.scss";
 import Button from "components/Button";
-import { useDispatch, useSelector } from "react-redux";
-import requestAccounts from "utils/requestAccounts";
+import useRequestAccounts from "hooks/useRequestAccounts";
 
 function Onboarding() {
-  const dispatch = useDispatch();
-
-  const accountState = useSelector((state) => state.account);
+  const { requestAccounts }: any = useRequestAccounts();
 
   return (
     <div className={styles.container}>
       <Button
-        onClick={() => requestAccounts(dispatch)}
+        onClick={async () => await requestAccounts()}
         size="xlarge"
         type="secondary"
       >

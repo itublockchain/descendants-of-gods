@@ -18,7 +18,7 @@ export const marketPlace = createSlice({
     toggleSelect: (state, action) => {
       const payload = action.payload;
       if (state.selected.includes(payload)) {
-        state.selected = state.selected.filter((item) => item != payload);
+        state.selected = state.selected.filter((item) => item !== payload);
       } else {
         state.selected.push(payload);
       }

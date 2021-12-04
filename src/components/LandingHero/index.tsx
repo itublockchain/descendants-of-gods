@@ -1,11 +1,9 @@
 import Button from "components/Button";
-import Modal from "components/Modal";
 import React from "react";
 import styles from "./LandingHero.module.scss";
 import { useNavigate } from "react-router";
 
 const LandingHero = () => {
-  const [isOpen, setIsOpen] = React.useState(false);
   let navigate = useNavigate();
 
   return (

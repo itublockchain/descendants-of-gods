@@ -26,7 +26,12 @@ const Game = () => {
   }
 
   if (!areaSelected) {
-    return <AreaSelector setAreaSelected={setAreaSelected} />;
+    return (
+      <AreaSelector
+        areaSelected={areaSelected}
+        setAreaSelected={setAreaSelected}
+      />
+    );
   }
 
   return (
