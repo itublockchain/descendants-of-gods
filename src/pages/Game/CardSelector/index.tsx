@@ -29,7 +29,9 @@ function CardSelector() {
   const [selectedDeck, setSelectedDeck] = useState([-1, -1, -1, -1, -1]);
 
   const joinMatchReq = async () => {
-    await MatchMakerContract.connect(signer).registerToMatch(1, selectedDeck);
+    await MatchMakerContract.connect(signer).registerToMatch(1, selectedDeck, {
+      gasLimit: "500000"
+    });
   };
 
   useEffect(() => {
@@ -55,7 +57,8 @@ function CardSelector() {
     const item = ethers.utils.parseEther("999999999999999");
     await SonsContract.connect(signer).approve(
       MatchMakerContract.address,
-      item
+      item,
+      { gasLimit: "500000" }
     );
 
     try {
