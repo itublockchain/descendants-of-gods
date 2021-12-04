@@ -62,7 +62,9 @@ function CardSelector() {
         onStart: () => dispatch(setStage(STAGES.MatchPlayers))
       });
       dispatch(setStage(STAGES.InGame));
-    } catch (err) {}
+    } catch (err) {
+      alert(err);
+    }
   };
 
   useEffect(() => {
