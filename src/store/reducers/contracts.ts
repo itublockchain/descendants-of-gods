@@ -21,7 +21,7 @@ const initialState: ContractState = {
   FlashContract: null,
   MatchMakerContract: null,
   GodContract: null,
-  MarketplaceContract: null,
+  MarketplaceContract: null
 };
 
 export const contractSlicer = createSlice({
@@ -65,8 +65,8 @@ export const contractSlicer = createSlice({
       state.GodContract = action.payload.GodContract;
       state.MarketplaceContract = action.payload.MarketplaceContract;
       //state.MatchMakerContract = action.payload.MatchMakerContract;
-    },
-  },
+    }
+  }
 });
 
 export const {
@@ -77,7 +77,7 @@ export const {
   setBoardContract,
   setFlashContract,
   setMatchMakerContract,
-  setContractData,
+  setContractData
 } = contractSlicer.actions;
 
 export default contractSlicer.reducer;

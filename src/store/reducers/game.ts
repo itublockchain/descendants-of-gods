@@ -13,14 +13,14 @@ const initialState: GameState = {
   layout: LAYOUT.collapsed,
   table: {
     rows: 5,
-    columns: 5,
-  },
+    columns: 5
+  }
 };
 
 export const gameSlice = createSlice({
   name: "game",
   initialState,
-  reducers: {},
+  reducers: {}
 });
 
 // Action creators are generated for each case reducer function

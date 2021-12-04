@@ -50,7 +50,7 @@ export default function useRequestAccounts() {
         setAccountData({
           address: address,
           signedIn: true,
-          provider: provider,
+          provider: provider
         })
       );
 
@@ -59,7 +59,7 @@ export default function useRequestAccounts() {
           GodContract,
           BoardContract,
           FlashContract,
-          MarketplaceContract,
+          MarketplaceContract
         })
       );
 

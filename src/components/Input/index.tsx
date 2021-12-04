@@ -3,7 +3,7 @@ import React, {
   DetailedHTMLProps,
   InputHTMLAttributes,
   PropsWithoutRef,
-  ReactNode,
+  ReactNode
 } from "react";
 
 import Icon from "components/Icon";

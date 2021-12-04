@@ -11,14 +11,14 @@ export const store = configureStore({
     cards: cardSlicer,
     account: accounts,
     market: markteplace,
-    contracts: contractSlice,
+    contracts: contractSlice
   },
   middleware: (getDefaultMiddleware) => {
     const customizedMiddleware = getDefaultMiddleware({
-      serializableCheck: false,
+      serializableCheck: false
     });
     return customizedMiddleware;
-  },
+  }
 });
 
 export type RootState = ReturnType<typeof store.getState>;

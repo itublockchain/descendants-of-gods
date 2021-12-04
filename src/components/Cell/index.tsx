@@ -17,7 +17,7 @@ const Cell = ({ row, column }: CellProps) => {
       row,
       column,
       rows: table.rows,
-      columns: table.columns,
+      columns: table.columns
     }) || "";
 
   const [{ isOver, dropabble }, drop] = useDrop({
@@ -27,8 +27,8 @@ const Cell = ({ row, column }: CellProps) => {
     },
     collect: (monitor) => ({
       isOver: !!monitor.isOver(),
-      dropabble: !!monitor.canDrop(),
-    }),
+      dropabble: !!monitor.canDrop()
+    })
   });
 
   return (

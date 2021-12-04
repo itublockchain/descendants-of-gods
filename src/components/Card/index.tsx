@@ -20,8 +20,8 @@ const Card = ({ className, hoverable, rotate, draggable }: CardProps) => {
     item: { type: "asfafs" },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
-      isDraggable: hoverable,
-    }),
+      isDraggable: hoverable
+    })
   });
 
   return (

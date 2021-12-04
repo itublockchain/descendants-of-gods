@@ -7,7 +7,7 @@ type MarketPlaceState = {
 
 const initialState: MarketPlaceState = {
   cards: ["Warrior", "Archer", "Wizard", "Healer", "Titan"],
-  selected: [],
+  selected: []
 };
 
 export const marketPlace = createSlice({
@@ -21,8 +21,8 @@ export const marketPlace = createSlice({
       } else {
         state.selected.push(payload);
       }
-    },
-  },
+    }
+  }
 });
 
 // Action creators are generated for each case reducer function

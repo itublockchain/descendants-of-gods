@@ -9,13 +9,15 @@ import styles from "./Game.module.scss";
 import { useSelector } from "react-redux";
 import Onboarding from "pages/Game/Onboarding";
 import { useState } from "react";
-import AreaSelector from "./AreaSelector";
+import AreaSelector from "pages/Game/AreaSelector";
+import Matching from "./Matching";
 
 const Game = () => {
   const accountState = useSelector((state: RootState) => state.account);
   const { layout } = useSelector((state: RootState) => state.game);
 
   const [areaSelected, setAreaSelected] = useState(false);
+  const [isMatched, setIsMatched] = useState(false);
 
   if (accountState.signedIn === null) {
     return null;
@@ -25,13 +27,17 @@ const Game = () => {
     return <Onboarding />;
   }
 
-  if (!areaSelected) {
+  if (!areaSelected && !isMatched) {
     return (
       <AreaSelector
         areaSelected={areaSelected}
         setAreaSelected={setAreaSelected}
       />
     );
+  }
+
+  if (areaSelected && !isMatched) {
+    return <Matching />;
   }
 
   return (

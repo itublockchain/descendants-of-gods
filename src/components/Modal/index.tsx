@@ -17,7 +17,7 @@ const Modal = ({
   close,
   children,
   closeOutside = true,
-  opacity = 0.3,
+  opacity = 0.3
 }: ModalProps) => {
   const { ref } = useClickOutside(closeOutside ? close : null);
 
@@ -39,7 +39,7 @@ const Modal = ({
 
   const fadeIn = useSpring({
     opacity: isOpen ? 1 : 0,
-    config: { duration: 200 },
+    config: { duration: 200 }
   });
 
   return (

@@ -3,7 +3,7 @@ import {
   ReactNode,
   cloneElement,
   forwardRef,
-  isValidElement,
+  isValidElement
 } from "react";
 
 import React from "react";
@@ -23,7 +23,7 @@ const Icon = forwardRef<HTMLDivElement, IconProps>(
       if (isValidElement(children)) {
         return cloneElement(children, {
           width: size,
-          height: size,
+          height: size
         });
       }
       return children;
