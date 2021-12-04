@@ -2,18 +2,17 @@ import styles from "./AreaSelector.module.scss";
 import SmallImage from "assets/images/area-selector/small-map.png";
 import MapCropped from "assets/images/area-selector/map-cropped.png";
 import Greek1 from "assets/images/area-selector/greek-1.png";
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import { useDispatch } from "react-redux";
+import { setStage } from "store/reducers/game";
 
-type AreaSelectorProps = {
-  setAreaSelected: Dispatch<SetStateAction<boolean>>;
-  areaSelected: boolean;
-};
-
-function AreaSelector({ areaSelected, setAreaSelected }: AreaSelectorProps) {
+function AreaSelector() {
   //const [board, setBoard] = useState<boolean | null>(false);
   const ref = useRef<HTMLImageElement>(null);
   const [citySelected, setCitySelected] = useState(false);
   let timer: any = null;
+
+  const dispatch = useDispatch();
 
   const handleAnimation = (escape?: boolean) => {
     const el = ref?.current;
@@ -43,9 +42,9 @@ function AreaSelector({ areaSelected, setAreaSelected }: AreaSelectorProps) {
     };
   }, []);
 
-  const joinToBoard = (id: number) => {
+  const joinToCard = (id: number) => {
     if (id === 1) {
-      setAreaSelected(true);
+      dispatch(setStage("SelectCards"));
       console.log("join to board");
     }
   };
@@ -65,7 +64,7 @@ function AreaSelector({ areaSelected, setAreaSelected }: AreaSelectorProps) {
         ) : (
           <div className={styles.smallMapWrapper}>
             <img
-              onClick={() => joinToBoard(1)}
+              onClick={() => joinToCard(1)}
               className={styles.greek1}
               alt=""
               ref={ref}
