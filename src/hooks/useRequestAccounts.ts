@@ -2,7 +2,17 @@
 import { ethers } from "ethers";
 import { useDispatch } from "react-redux";
 import { setAccountData, signedIn } from "store/reducers/accounts";
-import { godABI, boardABI, flashABI, marketplaceABI } from "abi";
+import {
+  godABI,
+  boardABI,
+  flashABI,
+  marketplaceABI,
+  matchMakerABI,
+  arenaABI,
+  biliraABI,
+  sonsABI,
+  xpABI
+} from "abi";
 import { setContractData } from "store/reducers/contracts";
 import { checkIfRightNetwork } from "utils/checkIfRightNetwork";
 
@@ -16,6 +26,18 @@ const AVALANCHE_NETWORK = {
   name: "Avalanche Fuji C Chain",
   rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
   nativeCurrency: { name: "AVAX", decimals: 18, symbol: "AVAX" }
+};
+
+const contractAddresses = {
+  GodContract: "0xb6F5e4847F129eA655c25D08D9395f45Dae8Df0E",
+  ArenaContract: "0x5F9DEaA5da071E3fE8d83ad06C8c8dAE0ACc66F0",
+  SonsContract: "0xe80A8A52Dcd1644E12A603f570566B3AF7c13440",
+  XpContract: "0x2fe6B047140D120CD39247C55fdFff76970cf08A",
+  BiliraContract: "0x8619525909B89a911e70FbAF3D24FBD504c6DDd2",
+  MatchMakerContract: "0x08b082714a210F3B877ec770f462c5491881CA12",
+  MarketplaceContract: "0x74448d789397180d9a08a3793E86B366A3C178a2",
+  BoardContract: "0x9A02427186e667A946F6A85b271303e8A9Af06f6",
+  FlashContract: "0xF2b562f994130aDC7AF35BB05DCB3db514DA1d75"
 };
 
 export default function useRequestAccounts() {
@@ -35,23 +57,53 @@ export default function useRequestAccounts() {
       const address = await signer.getAddress();
 
       const GodContract = new ethers.Contract(
-        "0x646bc1323A7237A8901CF1Ae97bcAE0F95c0cC7f",
+        contractAddresses.GodContract,
         godABI,
         provider
       );
       const BoardContract = new ethers.Contract(
-        "0x9A02427186e667A946F6A85b271303e8A9Af06f6",
+        contractAddresses.BoardContract,
         boardABI,
         provider
       );
       const FlashContract = new ethers.Contract(
-        "0xF2b562f994130aDC7AF35BB05DCB3db514DA1d75",
+        contractAddresses.FlashContract,
         flashABI,
         provider
       );
       const MarketplaceContract = new ethers.Contract(
-        "0x7439B5441634e56E7bF71B3Ed8eEc2c34885Bb78",
+        contractAddresses.MarketplaceContract,
         marketplaceABI,
+        provider
+      );
+
+      const MatchMakerContract = new ethers.Contract(
+        contractAddresses.MatchMakerContract,
+        matchMakerABI,
+        provider
+      );
+
+      const ArenaContract = new ethers.Contract(
+        contractAddresses.ArenaContract,
+        arenaABI,
+        provider
+      );
+
+      const BiliraContract = new ethers.Contract(
+        contractAddresses.BiliraContract,
+        biliraABI,
+        provider
+      );
+
+      const SonsContract = new ethers.Contract(
+        contractAddresses.SonsContract,
+        sonsABI,
+        provider
+      );
+
+      const XpContract = new ethers.Contract(
+        contractAddresses.XpContract,
+        xpABI,
         provider
       );
 
@@ -68,7 +120,12 @@ export default function useRequestAccounts() {
           GodContract,
           BoardContract,
           FlashContract,
-          MarketplaceContract
+          MarketplaceContract,
+          MatchMakerContract,
+          ArenaContract,
+          BiliraContract,
+          SonsContract,
+          XpContract
         })
       );
 

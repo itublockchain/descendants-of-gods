@@ -3563,7 +3563,7 @@ export const sonsABI = [
   }
 ];
 
-const xpABI = [
+export const xpABI = [
   {
     anonymous: false,
     inputs: [
