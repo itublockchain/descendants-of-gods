@@ -3,8 +3,7 @@
   border-radius: 8px;
   height: 300px;
   width: 250px;
-  margin-left: auto;
-  margin-right: auto;
+
   transition: transform 0.5s;
   user-select: none;
 
@@ -14,6 +13,10 @@
   }
   &.rotate {
     transform: rotateZ(20deg);
+  }
+
+  &.draggable {
+    cursor: grab;
   }
 
   &.hoverable {

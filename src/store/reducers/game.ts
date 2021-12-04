@@ -18,7 +18,7 @@ const initialState: GameState = {
     columns: 5
   },
   selectedCards: [],
-  stage: "SelectMap"
+  stage: "SelectCard"
 };
 
 export const gameSlice = createSlice({

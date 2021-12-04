@@ -26,7 +26,7 @@ const Card = ({
     item: { type: "asfafs" },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
-      isDraggable: hoverable
+      isDraggable: hoverable || draggable
     })
   });
 
@@ -37,6 +37,7 @@ const Card = ({
         styles.card,
         layout === LAYOUT.collapsed && styles.collapsed,
         hoverable && !isDragging && styles.hoverable,
+        draggable && styles.draggable,
         rotate && styles.rotate,
         className
       )}

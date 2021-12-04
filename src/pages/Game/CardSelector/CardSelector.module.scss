@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   padding-top: 3rem;
+  overflow: hidden;
 }
 
 .container {
@@ -17,15 +18,11 @@
     height: 150px;
     width: 125px;
   }
-
-  .card.selected {
-    box-shadow: 0 0 0 7px red;
-  }
 }
 
-.card {
-  height: 200px;
-  width: 150px;
+.eachCard {
+  height: 130px !important;
+  width: 90px !important;
   background-color: white;
   border-radius: 8px;
 }
@@ -45,8 +42,17 @@
 }
 
 .cards {
+  gap: 24px;
   display: flex;
-  margin-top: 110px;
+  margin-top: 64px;
+  overflow: hidden;
+  justify-content: center;
+  flex: 1;
+}
+
+.cardsWrapper {
+  width: 100vw;
+  overflow-x: auto;
 }
 
 .cardWrapper {
@@ -61,4 +67,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.slots {
+  margin-top: auto;
+  display: flex;
+  gap: 24px;
+  margin-bottom: 24px;
+}
+
+.slot {
+  display: flex;
+  width: 180px;
+  height: 240px;
+  border: 3px solid rgb(75, 69, 69);
+  border-radius: 8px;
+
+  &.isOver {
+    opacity: 0.8;
+    background-color: var(--accent);
+  }
 }
