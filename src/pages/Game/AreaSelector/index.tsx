@@ -7,9 +7,10 @@ import Greek3 from "assets/images/area-selector/part-3.png";
 import Greek4 from "assets/images/area-selector/part-4.png";
 import Greek5 from "assets/images/area-selector/part-5.png";
 import { useEffect, useRef, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { setStage, STAGES } from "store/reducers/game";
 import { clsnm } from "utils/clsnm";
+import { RootState } from "store";
 
 function AreaSelector() {
   //const [board, setBoard] = useState<boolean | null>(false);
@@ -70,7 +71,9 @@ function AreaSelector() {
           <div className={styles.smallMapWrapper}>
             <div className={styles["small-map--container"]}>
               <img
-                onClick={() => joinToCard(1)}
+                onClick={() => {
+                  joinToCard(1);
+                }}
                 className={clsnm(styles.greek, styles.greek1)}
                 alt=""
                 ref={ref}

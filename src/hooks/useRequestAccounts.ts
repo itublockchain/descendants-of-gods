@@ -29,15 +29,13 @@ const AVALANCHE_NETWORK = {
 };
 
 const contractAddresses = {
-  GodContract: "0x3fC3D5a080f370aBa851b29E914955E2f2640869",
-  ArenaContract: "0x5F9DEaA5da071E3fE8d83ad06C8c8dAE0ACc66F0",
-  SonsContract: "0xe80A8A52Dcd1644E12A603f570566B3AF7c13440",
-  XpContract: "0x2fe6B047140D120CD39247C55fdFff76970cf08A",
-  BiliraContract: "0x8619525909B89a911e70FbAF3D24FBD504c6DDd2",
-  MatchMakerContract: "0x08b082714a210F3B877ec770f462c5491881CA12",
-  MarketplaceContract: "0x772ddC853194a6A110e2a11E718E66E5CCa4ACec",
-  BoardContract: "0x9A02427186e667A946F6A85b271303e8A9Af06f6",
-  FlashContract: "0xF2b562f994130aDC7AF35BB05DCB3db514DA1d75"
+  GodContract: "0x53a129BfA6eb5d4e4AbE93E2AC685a5c6ab568Ec",
+  ArenaContract: "0x0AC222E30846EfB98942545E595dfe1190046901",
+  SonsContract: "0xc0d13b075cFe80e5eEc2B67E1A50DcC174ddb3A2",
+  XpContract: "0x7123660C49Ea63364992167b309055271101b209",
+  BiliraContract: "0xb8405e04C54550e1204260957E80929C481001f7",
+  MatchMakerContract: "0x509Dd9D637664CDFA3c3c644E20a75b333C9AC16",
+  MarketplaceContract: "0x98f7e99CEeb4889575Fe025D22A353f164B291A0"
 };
 
 export default function useRequestAccounts() {
@@ -58,16 +56,6 @@ export default function useRequestAccounts() {
       const GodContract = new ethers.Contract(
         contractAddresses.GodContract,
         godABI,
-        provider
-      );
-      const BoardContract = new ethers.Contract(
-        contractAddresses.BoardContract,
-        boardABI,
-        provider
-      );
-      const FlashContract = new ethers.Contract(
-        contractAddresses.FlashContract,
-        flashABI,
         provider
       );
       const MarketplaceContract = new ethers.Contract(
@@ -118,8 +106,6 @@ export default function useRequestAccounts() {
       dispatch(
         setContractData({
           GodContract,
-          BoardContract,
-          FlashContract,
           MarketplaceContract,
           MatchMakerContract,
           ArenaContract,

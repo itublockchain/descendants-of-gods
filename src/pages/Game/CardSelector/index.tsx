@@ -7,15 +7,33 @@ import { setStage, STAGES } from "store/reducers/game";
 import { RootState } from "store";
 import { Fragment, useEffect, useState } from "react";
 import CardWrapper from "components/CardWrapper";
+import { useRequest } from "hooks/useRequest";
+import { ethers } from "ethers";
 
 function CardSelector() {
-  const { GodContract } = useSelector((state: RootState) => state.contracts);
-  const { signer } = useSelector((state: RootState) => state.account);
+  const { GodContract, MatchMakerContract, SonsContract } = useSelector(
+    (state: RootState) => state.contracts
+  );
+  const { signer, address: signerAddress } = useSelector(
+    (state: RootState) => state.account
+  );
   const dispatch = useDispatch();
   const [cards, setCards] = useState([]);
   const [oldCards, setOldCards] = useState([]);
 
   const [selectedDeck, setSelectedDeck] = useState([-1, -1, -1, -1, -1]);
+
+  const joinMatchReq = useRequest(
+    () => MatchMakerContract.connect(signer).registerToMatch(1, selectedDeck),
+    {
+      onSuccess: (res) => {
+        dispatch(setStage(STAGES.MatchPlayers));
+      },
+      onFail: (err) => {
+        console.log(err);
+      }
+    }
+  );
 
   useEffect(() => {
     if (!GodContract || !signer) return;
@@ -29,7 +47,46 @@ function CardSelector() {
       setOldCards(numbers);
     }
     fetchData();
-  }, [GodContract, signer]);
+  }, [GodContract, signer, MatchMakerContract]);
+
+  useEffect(() => {
+    const joinMatch = async () => {
+      if (MatchMakerContract) {
+        const [isPlayerInBoard, address] =
+          await MatchMakerContract.arenaToPlayer(1);
+
+        if (isPlayerInBoard && address === signerAddress) {
+          dispatch(setStage(STAGES.MatchPlayers));
+        }
+      }
+    };
+    joinMatch();
+  }, [MatchMakerContract]);
+
+  const enterMatch = async () => {
+    if (selectedDeck.includes(-1)) {
+      alert("Select 5 cards");
+      return;
+    }
+    const [isPlayerInBoard, address] = await MatchMakerContract.arenaToPlayer(
+      1
+    );
+
+    if (!isPlayerInBoard) {
+      const item = ethers.utils.parseEther("999999999999999");
+      await SonsContract.connect(signer).approve(
+        MatchMakerContract.address,
+        item
+      );
+      joinMatchReq.exec();
+    } else {
+      if (address !== signerAddress) {
+        dispatch(setStage(STAGES.InGame));
+      } else {
+        dispatch(setStage(STAGES.MatchPlayers));
+      }
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -71,7 +128,11 @@ function CardSelector() {
         ))}
       </div>
 
-      <Button onClick={() => dispatch(setStage(STAGES.InGame))} size="large">
+      <Button
+        loading={joinMatchReq.status.isPending}
+        onClick={enterMatch}
+        size="large"
+      >
         Enter Match
       </Button>
     </div>
