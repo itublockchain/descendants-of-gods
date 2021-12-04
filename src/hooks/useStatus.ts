@@ -26,7 +26,7 @@ export function useStatus(initialState = "") {
         setStatus(FAIL);
         if (data) setPayload(data);
       },
-      payload,
+      payload
     }),
     [payload, status]
   );

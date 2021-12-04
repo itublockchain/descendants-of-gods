@@ -5,7 +5,7 @@ export const CARD = {
   "1": "ARCHER",
   "2": "WIZARD",
   "3": "HEALER",
-  "4": "TITAN",
+  "4": "TITAN"
 };
 
 type CardState = {
@@ -17,17 +17,17 @@ type CardState = {
 const initialState: CardState = {
   selectedCards: {},
   user: {
-    deck: [0, 1, 1, 1, 2, 3],
+    deck: [0, 1, 1, 1, 2, 3]
   },
   enemy: {
-    deck: [0, 1, 1, 1, 2, 3],
-  },
+    deck: [0, 1, 1, 1, 2, 3]
+  }
 };
 
 export const cardSlicer = createSlice({
   name: "cards",
   initialState,
-  reducers: {},
+  reducers: {}
 });
 
 export const {} = cardSlicer.actions;

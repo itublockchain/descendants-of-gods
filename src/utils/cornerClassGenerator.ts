@@ -9,7 +9,7 @@ export const cornerClassGenerator = ({
   rows,
   columns,
   row,
-  column,
+  column
 }: CornerClassGeneratorProps) => {
   const topLeft = row === 0 && column === 0;
   const topRight = row === 0 && column === columns - 1;
