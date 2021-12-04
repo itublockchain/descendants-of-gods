@@ -2111,28 +2111,23 @@ export const matchMakerABI = [
   {
     inputs: [
       {
-        internalType: "contract XP",
-        name: "xpAddress",
-        type: "address"
-      },
-      {
         internalType: "contract ARENA",
         name: "arenaAddress",
         type: "address"
       },
       {
-        internalType: "contract SONS",
-        name: "sonsAddress",
-        type: "address"
-      },
-      {
-        internalType: "contract BILIRA",
-        name: "biliraAddress",
-        type: "address"
-      },
-      {
         internalType: "contract GOD",
-        name: "playerAddress",
+        name: "godAddress",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "sons",
+        type: "address"
+      },
+      {
+        internalType: "address",
+        name: "bilira",
         type: "address"
       }
     ],
@@ -2140,138 +2135,112 @@ export const matchMakerABI = [
     type: "constructor"
   },
   {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "gameId",
-        type: "uint256"
-      }
-    ],
-    name: "GameRegistered",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "gameId",
-        type: "uint256"
-      },
-      {
-        indexed: false,
-        internalType: "address",
-        name: "instance",
-        type: "address"
-      }
-    ],
-    name: "GameStarted",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: true,
-        internalType: "address",
-        name: "previousOwner",
-        type: "address"
-      },
-      {
-        indexed: true,
-        internalType: "address",
-        name: "newOwner",
-        type: "address"
-      }
-    ],
-    name: "OwnershipTransferred",
-    type: "event"
-  },
-  {
-    anonymous: false,
-    inputs: [
-      {
-        indexed: false,
-        internalType: "uint256",
-        name: "gameId",
-        type: "uint256"
-      }
-    ],
-    name: "WaitingLeave",
-    type: "event"
-  },
-  {
     inputs: [
       {
         internalType: "uint256",
-        name: "",
+        name: "listingId",
         type: "uint256"
       }
     ],
-    name: "arenaToPlayer",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "exists",
-        type: "bool"
-      },
-      {
-        internalType: "address",
-        name: "addr",
-        type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "gameId",
-        type: "uint256"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "",
-        type: "address"
-      }
-    ],
-    name: "inGame",
-    outputs: [
-      {
-        internalType: "bool",
-        name: "",
-        type: "bool"
-      }
-    ],
-    stateMutability: "view",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "arenaId",
-        type: "uint256"
-      }
-    ],
-    name: "leaveGame",
+    name: "buyListing",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function"
   },
   {
     inputs: [],
-    name: "owner",
+    name: "getAllListings",
     outputs: [
       {
-        internalType: "address",
+        components: [
+          {
+            internalType: "bool",
+            name: "initialized",
+            type: "bool"
+          },
+          {
+            internalType: "enum AssetType",
+            name: "asset",
+            type: "uint8"
+          },
+          {
+            internalType: "enum TokenType",
+            name: "token",
+            type: "uint8"
+          },
+          {
+            internalType: "uint16",
+            name: "amount",
+            type: "uint16"
+          },
+          {
+            internalType: "address",
+            name: "owner",
+            type: "address"
+          },
+          {
+            internalType: "uint256",
+            name: "assetId",
+            type: "uint256"
+          },
+          {
+            internalType: "uint256",
+            name: "price",
+            type: "uint256"
+          }
+        ],
+        internalType: "struct ListingDetails[]",
         name: "",
+        type: "tuple[]"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "idToListingDetails",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "initialized",
+        type: "bool"
+      },
+      {
+        internalType: "enum AssetType",
+        name: "asset",
+        type: "uint8"
+      },
+      {
+        internalType: "enum TokenType",
+        name: "token",
+        type: "uint8"
+      },
+      {
+        internalType: "uint16",
+        name: "amount",
+        type: "uint16"
+      },
+      {
+        internalType: "address",
+        name: "owner",
         type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "assetId",
+        type: "uint256"
+      },
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256"
       }
     ],
     stateMutability: "view",
@@ -2285,19 +2254,17 @@ export const matchMakerABI = [
         type: "uint256"
       },
       {
-        internalType: "uint8[]",
-        name: "deck",
-        type: "uint8[]"
+        internalType: "enum TokenType",
+        name: "token",
+        type: "uint8"
+      },
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256"
       }
     ],
-    name: "registerToMatch",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [],
-    name: "renounceOwnership",
+    name: "listArena",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function"
@@ -2305,12 +2272,40 @@ export const matchMakerABI = [
   {
     inputs: [
       {
-        internalType: "address",
-        name: "newOwner",
-        type: "address"
+        internalType: "uint256",
+        name: "cardType",
+        type: "uint256"
+      },
+      {
+        internalType: "uint16",
+        name: "amount",
+        type: "uint16"
+      },
+      {
+        internalType: "enum TokenType",
+        name: "token",
+        type: "uint8"
+      },
+      {
+        internalType: "uint256",
+        name: "price",
+        type: "uint256"
       }
     ],
-    name: "transferOwnership",
+    name: "listGod",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "listingId",
+        type: "uint256"
+      }
+    ],
+    name: "removeListing",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function"

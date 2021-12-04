@@ -30,13 +30,13 @@ const AVALANCHE_NETWORK = {
 };
 
 const contractAddresses = {
-  GodContract: "0x53a129BfA6eb5d4e4AbE93E2AC685a5c6ab568Ec",
-  ArenaContract: "0x0AC222E30846EfB98942545E595dfe1190046901",
-  SonsContract: "0xc0d13b075cFe80e5eEc2B67E1A50DcC174ddb3A2",
-  XpContract: "0x7123660C49Ea63364992167b309055271101b209",
-  BiliraContract: "0xb8405e04C54550e1204260957E80929C481001f7",
-  MatchMakerContract: "0x509Dd9D637664CDFA3c3c644E20a75b333C9AC16",
-  MarketplaceContract: "0x98f7e99CEeb4889575Fe025D22A353f164B291A0"
+  GodContract: "0x394C8bd7f343EE9bB7c831Af8595aC4C20c36Ee7",
+  ArenaContract: "0xC5E254E91B4C57a7E1579D53f778FEAFf1aA4421",
+  SonsContract: "0xC32488f6CaA666ccb70780e20aFaa28b3A12F363",
+  XpContract: "0x012FEdd7b6838BD6989AE325B76C0785F0BA7EaF",
+  BiliraContract: "0xfA245Dc1B7af41cd7e89eF32659cC80966c90c23",
+  MatchMakerContract: "0xb6716aB863D989C1Da014a1dc7D16D903058FB40",
+  MarketplaceContract: "0xC8393b1A36099786c5A7b1313Dc6d862ccd46F5B"
 };
 
 export default function useRequestAccounts() {
@@ -99,7 +99,9 @@ export default function useRequestAccounts() {
         dispatch(setStage(STAGES.SelectMap));
       });
 
-      MatchMakerContract.on("GameStarted", () => {
+      MatchMakerContract.on("GameStarted", (_, __) => {
+        console.log("game started");
+
         dispatch(setStage(STAGES.InGame));
       });
 
