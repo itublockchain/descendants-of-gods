@@ -47,6 +47,27 @@
   }
 }
 
+.smallMapWrapper {
+  position: fixed;
+  width: 75vw;
+  height: 82vh;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+
+  & .greek1 {
+    position: absolute;
+    left: 58%;
+    transform: translateX(-50%) scale(0.9);
+    transition: transform 0.1s;
+    &:hover {
+      transition: transform 0.1s;
+      transform: translateX(-50%) scale(1);
+      cursor: pointer;
+    }
+  }
+}
+
 @keyframes animation {
   from {
     left: 190px;

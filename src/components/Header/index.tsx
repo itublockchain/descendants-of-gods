@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { RootState } from "store";
 import useRequestAccounts from "hooks/useRequestAccounts";
+import { Link } from "react-router-dom";
+import Typography from "components/Typography";
 
 const Header = () => {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -38,7 +40,16 @@ const Header = () => {
 
   return (
     <header ref={ref} className={styles.header}>
-      <div className={styles.logo}>Logo field</div>
+      <div className={styles.logoWrapper}>
+        <div>Logo field</div>
+        <div className={styles.links}>
+          <Link className={styles.link} to="/market">
+            <Typography variant="body1" weight="medium">
+              Marketplace
+            </Typography>
+          </Link>
+        </div>
+      </div>
       <div className={styles.menu}>
         {signedIn === false ? (
           <Button

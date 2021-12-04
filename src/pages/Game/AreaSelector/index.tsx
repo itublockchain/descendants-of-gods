@@ -1,7 +1,8 @@
 import styles from "./AreaSelector.module.scss";
 import SmallImage from "assets/images/area-selector/small-map.png";
 import MapCropped from "assets/images/area-selector/map-cropped.png";
-import { Dispatch, SetStateAction, useEffect, useRef } from "react";
+import Greek1 from "assets/images/area-selector/greek-1.png";
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
 
 type AreaSelectorProps = {
   setAreaSelected: Dispatch<SetStateAction<boolean>>;
@@ -11,15 +12,21 @@ type AreaSelectorProps = {
 function AreaSelector({ areaSelected, setAreaSelected }: AreaSelectorProps) {
   //const [board, setBoard] = useState<boolean | null>(false);
   const ref = useRef<HTMLImageElement>(null);
+  const [citySelected, setCitySelected] = useState(false);
+  let timer: any = null;
 
   const handleAnimation = () => {
     const el = ref?.current;
-
     if (el) {
       if (Array.from(el.classList).includes?.(styles.animation)) {
         el.classList.remove(styles.animation);
+        setCitySelected(false);
+        clearTimeout(timer);
       } else {
         el.classList.add(styles.animation);
+        timer = setTimeout(() => {
+          setCitySelected(true);
+        }, 2000);
       }
     }
   };
@@ -30,24 +37,42 @@ function AreaSelector({ areaSelected, setAreaSelected }: AreaSelectorProps) {
         handleAnimation();
       }
     };
-
     window.addEventListener("keydown", handleKey);
     return () => {
       window.removeEventListener("keydown", handleKey);
     };
   }, []);
 
+  const joinToBoard = (id: number) => {
+    if (id === 1) {
+      setAreaSelected(true);
+      console.log("join to board");
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles["map-container"]}>
         <img alt="" className={styles.mapCropped} src={MapCropped} />
-        <img
-          alt=""
-          ref={ref}
-          src={SmallImage}
-          className={styles["small-map"]}
-          onClick={handleAnimation}
-        />
+        {!citySelected ? (
+          <img
+            alt=""
+            ref={ref}
+            src={SmallImage}
+            className={styles["small-map"]}
+            onClick={handleAnimation}
+          />
+        ) : (
+          <div className={styles.smallMapWrapper}>
+            <img
+              onClick={() => joinToBoard(1)}
+              className={styles.greek1}
+              alt=""
+              ref={ref}
+              src={Greek1}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

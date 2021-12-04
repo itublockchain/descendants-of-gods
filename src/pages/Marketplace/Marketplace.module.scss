@@ -13,7 +13,7 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   gap: 32px;
   height: calc(100vh - var(--navbar-height) - 24px);
-  border: 1px solid var(--primary-600);
+  border: 1px solid var(--accent-active);
   border-radius: 8px;
 }
 
@@ -31,7 +31,7 @@
   height: 100%;
   width: 25%;
   border-radius: 8px;
-  border: 1px solid var(--primary-600);
+  border: 1px solid var(--accent-active);
   height: calc(100vh - var(--navbar-height) - 24px);
   overflow: hidden;
 }
@@ -71,7 +71,7 @@
 
   &.selected {
     background-color: var(--accent);
-    color: var(--text-color);
-    border-color: var(--accent);
+    color: var(--main-blue);
+    border-color: var(--main-blue);
   }
 }
