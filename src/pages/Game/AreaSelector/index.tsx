@@ -1,10 +1,15 @@
 import styles from "./AreaSelector.module.scss";
 import SmallImage from "assets/images/area-selector/small-map.png";
 import MapCropped from "assets/images/area-selector/map-cropped.png";
-import Greek1 from "assets/images/area-selector/greek-1.png";
+import Greek1 from "assets/images/area-selector/part-1.png";
+import Greek2 from "assets/images/area-selector/part-2.png";
+import Greek3 from "assets/images/area-selector/part-3.png";
+import Greek4 from "assets/images/area-selector/part-4.png";
+import Greek5 from "assets/images/area-selector/part-5.png";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import { setStage, STAGES } from "store/reducers/game";
+import { clsnm } from "utils/clsnm";
 
 function AreaSelector() {
   //const [board, setBoard] = useState<boolean | null>(false);
@@ -63,13 +68,43 @@ function AreaSelector() {
           />
         ) : (
           <div className={styles.smallMapWrapper}>
-            <img
-              onClick={() => joinToCard(1)}
-              className={styles.greek1}
-              alt=""
-              ref={ref}
-              src={Greek1}
-            />
+            <div className={styles["small-map--container"]}>
+              <img
+                onClick={() => joinToCard(1)}
+                className={clsnm(styles.greek, styles.greek1)}
+                alt=""
+                ref={ref}
+                src={Greek1}
+              />
+              <img
+                onClick={() => joinToCard(2)}
+                className={clsnm(styles.greek, styles.greek2)}
+                alt=""
+                ref={ref}
+                src={Greek2}
+              />
+              <img
+                onClick={() => joinToCard(3)}
+                className={clsnm(styles.greek, styles.greek3)}
+                alt=""
+                ref={ref}
+                src={Greek3}
+              />
+              <img
+                onClick={() => joinToCard(4)}
+                className={clsnm(styles.greek, styles.greek4)}
+                alt=""
+                ref={ref}
+                src={Greek4}
+              />
+              <img
+                onClick={() => joinToCard(5)}
+                className={clsnm(styles.greek, styles.greek5)}
+                alt=""
+                ref={ref}
+                src={Greek5}
+              />
+            </div>
           </div>
         )}
       </div>
