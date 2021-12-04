@@ -11,13 +11,12 @@ import Onboarding from "pages/Game/Onboarding";
 import { useState } from "react";
 import AreaSelector from "pages/Game/AreaSelector";
 import Matching from "./Matching";
+import CardSelector from "./CardSelector";
 
 const Game = () => {
   const accountState = useSelector((state: RootState) => state.account);
   const { layout } = useSelector((state: RootState) => state.game);
-
-  const [areaSelected, setAreaSelected] = useState(false);
-  const [isMatched, setIsMatched] = useState(false);
+  const gameState = useSelector((state: RootState) => state.game);
 
   if (accountState.signedIn === null) {
     return null;
@@ -27,17 +26,16 @@ const Game = () => {
     return <Onboarding />;
   }
 
-  if (!areaSelected && !isMatched) {
-    return (
-      <AreaSelector
-        areaSelected={areaSelected}
-        setAreaSelected={setAreaSelected}
-      />
-    );
+  if (gameState.stage === "SelectMap") {
+    return <AreaSelector />;
   }
 
-  if (areaSelected && !isMatched) {
+  if (gameState.stage === "MatchPlayers") {
     return <Matching />;
+  }
+
+  if (gameState.stage === "SelectCard") {
+    return <CardSelector />;
   }
 
   return (
