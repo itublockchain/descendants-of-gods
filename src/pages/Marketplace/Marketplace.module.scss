@@ -2,18 +2,16 @@
   display: flex;
   margin-top: var(--navbar-height);
   padding: 12px 24px;
+  justify-content: center;
 }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fill, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   margin-left: 32px;
-  flex-wrap: wrap;
   padding: 1rem;
-
-  overflow: auto;
-  gap: 12px;
-  height: calc(100vh - var(--navbar-height) - 24px);
+  grid-gap: 12px;
+  align-self: flex-start;
   border: 1px solid var(--accent-active);
   border-radius: 8px;
 }
