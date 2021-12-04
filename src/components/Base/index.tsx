@@ -27,6 +27,8 @@ const Base = ({ position, player }: BaseProps) => {
           return (
             <div className={styles.card}>
               <Card
+                index={item}
+                type="bottom"
                 rotate
                 hoverable={cardHoverable}
                 style={{

@@ -1,19 +1,28 @@
 import Cell from "components/Cell";
 import { RootState } from "store";
 import styles from "./Board.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { arrToObj } from "utils/arrToObj";
+import { useEffect } from "react";
+import { setCell } from "store/reducers/game";
 
 const Board = () => {
-  const { table } = useSelector((state: RootState) => state.game);
+  const { table, cellInfo } = useSelector((state: RootState) => state.game);
   const { rows, columns } = table || { rows: 5, columns: 5 };
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    const items = arrToObj(cellInfo);
+    dispatch(setCell(items));
+  }, []);
 
   return (
     <div>
-      {new Array(rows).fill(0).map((_, rindex) => (
+      {cellInfo.map((item: any, rindex: any) => (
         <div key={rindex} className={styles.row}>
-          {new Array(columns).fill(0).map((_, cindex) => (
+          {item.map((citem: any, cindex: any) => (
             <div key={cindex} className={styles.column}>
-              <Cell row={rindex} column={cindex} />
+              <Cell item={citem} row={rindex} column={cindex} />
             </div>
           ))}
         </div>

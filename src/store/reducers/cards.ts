@@ -10,12 +10,49 @@ export type CARDTYPES = "0" | "1" | "2" | "3" | "4";
 export const CARD = {
   "0": {
     name: "WARRIOR",
-    img: Warrior
+    img: Warrior,
+    rangeX: 1,
+    rangeY: 1,
+    deployEnergy: 1,
+    health: 4,
+    points: 2
   },
-  "1": { name: "ARCHER", img: Archer },
-  "2": { name: "WIZARD", img: Wizard },
-  "3": { name: "HEALER", img: Healer },
-  "4": { name: "TITAN", img: Titan }
+  "1": {
+    name: "ARCHER",
+    img: Archer,
+    rangeX: 3,
+    rangeY: 3,
+    deployEnergy: 1,
+    health: 2,
+    points: 1
+  },
+  "2": {
+    name: "WIZARD",
+    img: Wizard,
+    rangeX: 2,
+    rangeY: 2,
+    deployEnergy: 2,
+    health: 2,
+    points: 3
+  },
+  "3": {
+    name: "HEALER",
+    img: Healer,
+    rangeX: 2,
+    rangeY: 2,
+    deployEnergy: 3,
+    health: 4,
+    points: 2
+  },
+  "4": {
+    name: "TITAN",
+    img: Titan,
+    rangeX: 1,
+    rangeY: 1,
+    deployEnergy: 4,
+    health: 5,
+    points: 3
+  }
 };
 
 type CardState = {

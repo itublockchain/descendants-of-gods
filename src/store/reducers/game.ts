@@ -16,6 +16,10 @@ type GameState = {
   };
   selectedCards: Array<any>;
   stage: STAGES;
+  playedCards: any;
+  moveStack: any;
+  cellInfo: any;
+  energy: number;
 };
 
 const initialState: GameState = {
@@ -24,8 +28,39 @@ const initialState: GameState = {
     rows: 5,
     columns: 5
   },
-  selectedCards: [],
-  stage: STAGES.SelectMap
+  playedCards: [],
+  selectedCards: [0, 1, 2, 3, 4],
+  stage: STAGES.InGame,
+  moveStack: [],
+  cellInfo: [
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null],
+    [false, null, null, null, null]
+  ],
+  energy: 3
+  //  moveStack: [{origin:, target, id}]
 };
 
 export const gameSlice = createSlice({
@@ -38,11 +73,20 @@ export const gameSlice = createSlice({
     },
     setSelectedCards(state, action) {
       state.selectedCards = action.payload;
+    },
+    playCard: (state, action) => {
+      const { i, j, cardId } = action.payload;
+      if (!state.playedCards.includes(i)) {
+        state.playedCards.push(cardId);
+      }
+    },
+    setCell: (state, action) => {
+      state.cellInfo = action.payload;
     }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { setStage, setSelectedCards } = gameSlice.actions;
+export const { setStage, setSelectedCards, setCell } = gameSlice.actions;
 
 export default gameSlice.reducer;

@@ -12,6 +12,7 @@ type CardProps = {
   draggable?: boolean;
   index?: number;
   style?: any;
+  type?: "top" | "bottom";
 };
 
 const Card = ({
@@ -21,13 +22,14 @@ const Card = ({
   draggable,
   index,
   style,
+  type = "top",
   ...rest
 }: CardProps) => {
   const { layout } = useSelector((state: RootState) => state.game);
 
   const [{ isDragging, isDraggable }, drag] = useDrag({
     type: "1",
-    item: { type: "asfafs" },
+    item: { type: type, index: index },
     collect: (monitor) => ({
       isDragging: !!monitor.isDragging(),
       isDraggable: hoverable || draggable

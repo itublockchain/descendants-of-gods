@@ -8,10 +8,13 @@ import { useSelector } from "react-redux";
 type CellProps = {
   row: number;
   column: number;
+  item?: any;
 };
 
-const Cell = ({ row, column }: CellProps) => {
-  const { table } = useSelector((state: RootState) => state.game);
+const Cell = ({ row, column, item }: CellProps) => {
+  const { table, playedCards, moveStack, cellInfo, energy } = useSelector(
+    (state: RootState) => state.game
+  );
   const borderClass =
     cornerClassGenerator({
       row,
@@ -20,12 +23,18 @@ const Cell = ({ row, column }: CellProps) => {
       columns: table.columns
     }) || "";
 
-  const [{ isOver, dropabble }, drop] = useDrop({
+  const [{ isOver, droppable }, drop]: any = useDrop({
     accept: "1",
-    drop: (item, monitor) => {
+    drop: (item: any, monitor: any) => {
       //function
+      if (item?.type === "bottom") {
+        if (!playedCards.includes(item.index) && 4 - row !== 0) {
+          alert("Play to first row!");
+        } else {
+        }
+      }
     },
-    collect: (monitor) => ({
+    collect: (monitor: any) => ({
       isOver: !!monitor.isOver(),
       dropabble: !!monitor.canDrop()
     })
@@ -39,7 +48,7 @@ const Cell = ({ row, column }: CellProps) => {
         table?.rows - 1 === row && styles.lastRow,
         table?.columns - 1 === column && styles.lastCol,
         isOver && styles.over,
-        dropabble && styles.dropabble,
+        droppable && styles.dropabble,
         styles[borderClass]
       )}
     ></div>
