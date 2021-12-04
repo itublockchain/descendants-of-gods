@@ -63,7 +63,7 @@ export const contractSlicer = createSlice({
       state.BoardContract = action.payload.BOARDContract;
       state.FlashContract = action.payload.FLASHContract;
       state.GodContract = action.payload.GodContract;
-      state.MarketplaceContract = action.payload.marketplaceContract;
+      state.MarketplaceContract = action.payload.MarketplaceContract;
       //state.MatchMakerContract = action.payload.MatchMakerContract;
     },
   },
