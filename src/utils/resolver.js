@@ -1,4 +1,4 @@
-export const resolver = async ({ contract, eventName, promise }) => {
+export const resolver = async ({ contract, eventName, promise, onStart }) => {
   return new Promise((res, rej) => {
     promise?.();
 

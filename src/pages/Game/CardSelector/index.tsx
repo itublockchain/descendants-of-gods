@@ -58,7 +58,8 @@ function CardSelector() {
       await resolver({
         contract: MatchMakerContract,
         eventName: "GameStarted",
-        promise: joinMatchReq
+        promise: joinMatchReq,
+        onStart: () => dispatch(setStage(STAGES.MatchPlayers))
       });
       dispatch(setStage(STAGES.InGame));
     } catch (err) {}
@@ -107,10 +108,17 @@ function CardSelector() {
           />
         ))}
       </div>
-
-      <Button onClick={enterMatch} size="large">
-        Enter Match
-      </Button>
+      <div className="d-flex gap-16">
+        <Button
+          onClick={() => dispatch(setStage(STAGES.SelectMap))}
+          size="large"
+        >
+          Go back
+        </Button>
+        <Button onClick={enterMatch} size="large">
+          Enter Match
+        </Button>
+      </div>
     </div>
   );
 }
