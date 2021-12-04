@@ -2111,23 +2111,28 @@ export const matchMakerABI = [
   {
     inputs: [
       {
+        internalType: "contract XP",
+        name: "xpAddress",
+        type: "address"
+      },
+      {
         internalType: "contract ARENA",
         name: "arenaAddress",
         type: "address"
       },
       {
+        internalType: "contract SONS",
+        name: "sonsAddress",
+        type: "address"
+      },
+      {
+        internalType: "contract BILIRA",
+        name: "biliraAddress",
+        type: "address"
+      },
+      {
         internalType: "contract GOD",
-        name: "godAddress",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "sons",
-        type: "address"
-      },
-      {
-        internalType: "address",
-        name: "bilira",
+        name: "playerAddress",
         type: "address"
       }
     ],
@@ -2135,63 +2140,118 @@ export const matchMakerABI = [
     type: "constructor"
   },
   {
+    anonymous: false,
     inputs: [
       {
+        indexed: false,
         internalType: "uint256",
-        name: "listingId",
+        name: "gameId",
         type: "uint256"
       }
     ],
-    name: "buyListing",
-    outputs: [],
-    stateMutability: "nonpayable",
+    name: "GameRegistered",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "gameId",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "instance",
+        type: "address"
+      }
+    ],
+    name: "GameStarted",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: true,
+        internalType: "address",
+        name: "previousOwner",
+        type: "address"
+      },
+      {
+        indexed: true,
+        internalType: "address",
+        name: "newOwner",
+        type: "address"
+      }
+    ],
+    name: "OwnershipTransferred",
+    type: "event"
+  },
+  {
+    anonymous: false,
+    inputs: [
+      {
+        indexed: false,
+        internalType: "uint256",
+        name: "gameId",
+        type: "uint256"
+      },
+      {
+        indexed: false,
+        internalType: "address",
+        name: "leavingPlayer",
+        type: "address"
+      }
+    ],
+    name: "WaitingLeave",
+    type: "event"
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "",
+        type: "uint256"
+      }
+    ],
+    name: "arenaToPlayer",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "exists",
+        type: "bool"
+      },
+      {
+        internalType: "address",
+        name: "addr",
+        type: "address"
+      },
+      {
+        internalType: "uint256",
+        name: "gameId",
+        type: "uint256"
+      }
+    ],
+    stateMutability: "view",
     type: "function"
   },
   {
-    inputs: [],
-    name: "getAllListings",
+    inputs: [
+      {
+        internalType: "address",
+        name: "",
+        type: "address"
+      }
+    ],
+    name: "inGame",
     outputs: [
       {
-        components: [
-          {
-            internalType: "bool",
-            name: "initialized",
-            type: "bool"
-          },
-          {
-            internalType: "enum AssetType",
-            name: "asset",
-            type: "uint8"
-          },
-          {
-            internalType: "enum TokenType",
-            name: "token",
-            type: "uint8"
-          },
-          {
-            internalType: "uint16",
-            name: "amount",
-            type: "uint16"
-          },
-          {
-            internalType: "address",
-            name: "owner",
-            type: "address"
-          },
-          {
-            internalType: "uint256",
-            name: "assetId",
-            type: "uint256"
-          },
-          {
-            internalType: "uint256",
-            name: "price",
-            type: "uint256"
-          }
-        ],
-        internalType: "struct ListingDetails[]",
+        internalType: "bool",
         name: "",
-        type: "tuple[]"
+        type: "bool"
       }
     ],
     stateMutability: "view",
@@ -2201,46 +2261,23 @@ export const matchMakerABI = [
     inputs: [
       {
         internalType: "uint256",
-        name: "",
+        name: "arenaId",
         type: "uint256"
       }
     ],
-    name: "idToListingDetails",
+    name: "leaveGame",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "owner",
     outputs: [
       {
-        internalType: "bool",
-        name: "initialized",
-        type: "bool"
-      },
-      {
-        internalType: "enum AssetType",
-        name: "asset",
-        type: "uint8"
-      },
-      {
-        internalType: "enum TokenType",
-        name: "token",
-        type: "uint8"
-      },
-      {
-        internalType: "uint16",
-        name: "amount",
-        type: "uint16"
-      },
-      {
         internalType: "address",
-        name: "owner",
+        name: "",
         type: "address"
-      },
-      {
-        internalType: "uint256",
-        name: "assetId",
-        type: "uint256"
-      },
-      {
-        internalType: "uint256",
-        name: "price",
-        type: "uint256"
       }
     ],
     stateMutability: "view",
@@ -2254,17 +2291,19 @@ export const matchMakerABI = [
         type: "uint256"
       },
       {
-        internalType: "enum TokenType",
-        name: "token",
-        type: "uint8"
-      },
-      {
-        internalType: "uint256",
-        name: "price",
-        type: "uint256"
+        internalType: "uint8[]",
+        name: "deck",
+        type: "uint8[]"
       }
     ],
-    name: "listArena",
+    name: "registerToMatch",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "renounceOwnership",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function"
@@ -2272,40 +2311,12 @@ export const matchMakerABI = [
   {
     inputs: [
       {
-        internalType: "uint256",
-        name: "cardType",
-        type: "uint256"
-      },
-      {
-        internalType: "uint16",
-        name: "amount",
-        type: "uint16"
-      },
-      {
-        internalType: "enum TokenType",
-        name: "token",
-        type: "uint8"
-      },
-      {
-        internalType: "uint256",
-        name: "price",
-        type: "uint256"
+        internalType: "address",
+        name: "newOwner",
+        type: "address"
       }
     ],
-    name: "listGod",
-    outputs: [],
-    stateMutability: "nonpayable",
-    type: "function"
-  },
-  {
-    inputs: [
-      {
-        internalType: "uint256",
-        name: "listingId",
-        type: "uint256"
-      }
-    ],
-    name: "removeListing",
+    name: "transferOwnership",
     outputs: [],
     stateMutability: "nonpayable",
     type: "function"

@@ -26,12 +26,12 @@ function Matching({ setIsMatched }: any) {
 
   useEffect(() => {
     if (MatchMakerContract) {
-      MatchMakerContract.on("WaitingLeave", () => {
+      MatchMakerContract.on("WaitingLeave", (game: any, address: any) => {
         dispatch(setStage(STAGES.SelectMap));
       });
     }
     if (MatchMakerContract) {
-      MatchMakerContract.on("GameStarted", () => {
+      MatchMakerContract.on("GameStarted", (game: any, instance: any) => {
         dispatch(setStage(STAGES.InGame));
       });
     }
