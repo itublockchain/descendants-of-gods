@@ -1,6 +1,13 @@
 import { LAYOUT } from "common/constants/layout";
 import { createSlice } from "@reduxjs/toolkit";
 
+export enum STAGES {
+  "SelectMap" = 0,
+  "SelectCard" = 1,
+  "MatchPlayers" = 2,
+  "InGame" = 3
+}
+
 type GameState = {
   layout: LAYOUT.collapsed | LAYOUT.expanded;
   table: {
@@ -8,7 +15,7 @@ type GameState = {
     columns: number;
   };
   selectedCards: Array<any>;
-  stage: "SelectMap" | "SelectCard" | "MatchPlayers" | "InGame";
+  stage: STAGES;
 };
 
 const initialState: GameState = {
@@ -18,7 +25,7 @@ const initialState: GameState = {
     columns: 5
   },
   selectedCards: [],
-  stage: "SelectCard"
+  stage: STAGES.SelectMap
 };
 
 export const gameSlice = createSlice({
@@ -27,15 +34,7 @@ export const gameSlice = createSlice({
   reducers: {
     setStage(state, action) {
       const payload = action.payload;
-      if (payload === "SelectMap") {
-        state.stage = "SelectMap";
-      } else if (payload === "SelectCards") {
-        state.stage = "SelectCard";
-      } else if (payload === "MatchPlayers") {
-        state.stage = "MatchPlayers";
-      } else if (payload === "InGame") {
-        state.stage = "InGame";
-      }
+      state.stage = payload;
     }
   }
 });

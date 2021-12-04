@@ -3,13 +3,15 @@ import React, { useRef, useState } from "react";
 import styles from "./Matching.module.scss";
 import Card1 from "assets/cards/card1.png";
 import Card2 from "assets/cards/card2.png";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
 import Typography from "components/Typography";
 import Button from "components/Button";
+import { setStage, STAGES } from "store/reducers/game";
 
 function Matching({ setIsMatched }: any) {
   const hintRef: any = useRef();
+  const dispatch = useDispatch();
 
   const { provider } = useSelector((state: RootState) => state.account);
   const { MatchMakerContract } = useSelector(
@@ -40,7 +42,13 @@ function Matching({ setIsMatched }: any) {
           ref={hintRef}
         >
           Waiting another player to join
-          <Button className={styles.button}>Leave the queue</Button>
+          <Button
+            onClick={() => dispatch(setStage(STAGES.SelectMap))}
+            size="large"
+            className={styles.button}
+          >
+            Leave the queue
+          </Button>
         </Typography>
         <div className={styles["progress-bar--wrapper"]}>
           <div className={styles["progress-bar"]}></div>

@@ -12,6 +12,7 @@ import { useState } from "react";
 import AreaSelector from "pages/Game/AreaSelector";
 import Matching from "./Matching";
 import CardSelector from "./CardSelector";
+import { STAGES } from "store/reducers/game";
 
 const Game = () => {
   const accountState = useSelector((state: RootState) => state.account);
@@ -26,15 +27,15 @@ const Game = () => {
     return <Onboarding />;
   }
 
-  if (gameState.stage === "SelectMap") {
+  if (gameState.stage === STAGES.SelectMap) {
     return <AreaSelector />;
   }
 
-  if (gameState.stage === "MatchPlayers") {
+  if (gameState.stage === STAGES.MatchPlayers) {
     return <Matching />;
   }
 
-  if (gameState.stage === "SelectCard") {
+  if (gameState.stage === STAGES.SelectCard) {
     return <CardSelector />;
   }
 

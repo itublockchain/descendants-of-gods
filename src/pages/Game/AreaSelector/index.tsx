@@ -4,7 +4,7 @@ import MapCropped from "assets/images/area-selector/map-cropped.png";
 import Greek1 from "assets/images/area-selector/greek-1.png";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
-import { setStage } from "store/reducers/game";
+import { setStage, STAGES } from "store/reducers/game";
 
 function AreaSelector() {
   //const [board, setBoard] = useState<boolean | null>(false);
@@ -44,7 +44,7 @@ function AreaSelector() {
 
   const joinToCard = (id: number) => {
     if (id === 1) {
-      dispatch(setStage("SelectCards"));
+      dispatch(setStage(STAGES.MatchPlayers));
       console.log("join to board");
     }
   };

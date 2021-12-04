@@ -6,6 +6,7 @@
   align-items: center;
   padding-top: 3rem;
   overflow: hidden;
+  justify-content: center;
 }
 
 .container {
@@ -44,15 +45,23 @@
 .cards {
   gap: 24px;
   display: flex;
+  flex-wrap: nowrap;
   margin-top: 64px;
-  overflow: hidden;
   justify-content: center;
   flex: 1;
+  width: fit-content;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .cardsWrapper {
   width: 100vw;
   overflow-x: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  padding: 1rem;
 }
 
 .cardWrapper {
@@ -70,7 +79,7 @@
 }
 
 .slots {
-  margin-top: auto;
+  margin-top: 64px;
   display: flex;
   gap: 24px;
   margin-bottom: 24px;

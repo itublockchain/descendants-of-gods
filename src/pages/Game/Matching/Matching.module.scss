@@ -54,7 +54,7 @@
   .progress-bar::before {
     content: "";
     position: absolute;
-    background-color: var(--main-blue);
+    background-color: var(--primary-600);
     height: 20px;
     animation: progress-bar 1.5s;
     animation-iteration-count: infinite;

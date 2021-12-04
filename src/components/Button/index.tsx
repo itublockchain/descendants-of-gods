@@ -11,6 +11,7 @@ type ButtonProps = {
   size?: "small" | "medium" | "large" | "xlarge";
   type?: "primary" | "secondary";
   achilles?: boolean;
+  loading?: boolean;
 };
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -22,6 +23,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       size = "medium",
       type = "primary",
       achilles,
+      loading,
       ...props
     }: ButtonProps,
     ref
@@ -36,6 +38,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           styles.button,
           styles[size],
           styles[type],
+          loading ? styles.loading : "",
           className
         )}
         onClick={onClick}
@@ -43,12 +46,13 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       >
         <Typography
           achilles={achilles}
-          className="d-flex align-center"
+          className={clsnm(styles.content, loading && styles.loading)}
           variant={variant}
           weight="medium"
         >
           {children}
         </Typography>
+        <div className={styles.loadingIndicator}>{loading && "Sending..."}</div>
       </button>
     );
   }
