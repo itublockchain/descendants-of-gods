@@ -28,7 +28,6 @@ export default function useRequestAccounts() {
         window.ethereum,
         "any"
       );
-      await window.ethereum.enable();
 
       await provider.send("eth_requestAccounts", []);
       let signer = await provider.getSigner();
