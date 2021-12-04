@@ -44,7 +44,7 @@ function AreaSelector() {
 
   const joinToCard = (id: number) => {
     if (id === 1) {
-      dispatch(setStage(STAGES.MatchPlayers));
+      dispatch(setStage(STAGES.SelectCard));
       console.log("join to board");
     }
   };

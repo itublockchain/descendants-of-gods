@@ -48,7 +48,7 @@
     height: 20px;
     position: relative;
     overflow: hidden;
-    border-radius: 8px;
+    border-radius: 18px;
   }
 
   .progress-bar::before {
@@ -59,6 +59,7 @@
     animation: progress-bar 1.5s;
     animation-iteration-count: infinite;
     width: 200px;
+    border-radius: 8px;
   }
 
   @keyframes progress-bar {
