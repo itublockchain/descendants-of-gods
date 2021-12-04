@@ -81,7 +81,7 @@ export const marketplaceABI = [
           }
         ],
         internalType: "struct ListingDetails[]",
-        name: "results",
+        name: "",
         type: "tuple[]"
       }
     ],
@@ -399,9 +399,9 @@ export const godABI = [
     name: "getBalances",
     outputs: [
       {
-        internalType: "uint256[6]",
-        name: "balances",
-        type: "uint256[6]"
+        internalType: "uint256[]",
+        name: "",
+        type: "uint256[]"
       }
     ],
     stateMutability: "view",
