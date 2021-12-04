@@ -95,8 +95,12 @@ export default function useRequestAccounts() {
         provider
       );
 
-      MatchMakerContract.on("WaitingLeave", (gameId: any) => {
+      MatchMakerContract.on("WaitingLeave", () => {
         dispatch(setStage(STAGES.SelectMap));
+      });
+
+      MatchMakerContract.on("GameStarted", () => {
+        dispatch(setStage(STAGES.InGame));
       });
 
       dispatch(

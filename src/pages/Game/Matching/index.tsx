@@ -13,24 +13,11 @@ import { useNavigate } from "react-router";
 
 function Matching({ setIsMatched }: any) {
   const hintRef: any = useRef();
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const { signer } = useSelector((state: RootState) => state.account);
-  const { MatchMakerContract, SonsContract } = useSelector(
+  const { MatchMakerContract } = useSelector(
     (state: RootState) => state.contracts
   );
-
-  useEffect(() => {
-    if (MatchMakerContract) {
-      MatchMakerContract.on("GameStarted", (gameId: any) => {
-        console.log("hello");
-
-        dispatch(setStage(STAGES.InGame));
-        navigate(`/game/${gameId}`);
-      });
-    }
-  }, [MatchMakerContract]);
 
   const leaveGame = async () => {
     await MatchMakerContract.connect(signer).leaveGame(1);
