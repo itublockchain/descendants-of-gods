@@ -30,7 +30,7 @@ function CardSelector() {
 
   const joinMatchReq = async () => {
     await MatchMakerContract.connect(signer).registerToMatch(1, selectedDeck, {
-      gasLimit: "500000"
+      gasLimit: "2000000"
     });
   };
 
@@ -58,7 +58,7 @@ function CardSelector() {
     await SonsContract.connect(signer).approve(
       MatchMakerContract.address,
       item,
-      { gasLimit: "500000" }
+      { gasLimit: "2000000" }
     );
 
     try {
@@ -67,10 +67,16 @@ function CardSelector() {
         eventName: "GameStarted",
         promise: joinMatchReq,
         onStart: () => dispatch(setStage(STAGES.MatchPlayers))
-      }).then(([gameId, address]: any) => {
-        const ClashContract = new ethers.Contract(address, clashABI, provider);
-        dispatch(setClashContract(ClashContract));
-      });
+      })
+        .then(([gameId, address]: any) => {
+          const ClashContract = new ethers.Contract(
+            address,
+            clashABI,
+            provider
+          );
+          dispatch(setClashContract(ClashContract));
+        })
+        .catch((err) => console.log(err));
       dispatch(setStage(STAGES.InGame));
     } catch (err) {
       alert(err);

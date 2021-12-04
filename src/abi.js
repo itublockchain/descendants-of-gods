@@ -2047,6 +2047,59 @@ export const clashABI = [
     type: "function"
   },
   {
+    inputs: [],
+    name: "getAllCells",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "bool",
+            name: "occupied",
+            type: "bool"
+          },
+          {
+            internalType: "uint8",
+            name: "slotId",
+            type: "uint8"
+          },
+          {
+            internalType: "uint8",
+            name: "health",
+            type: "uint8"
+          },
+          {
+            internalType: "uint8",
+            name: "cardId",
+            type: "uint8"
+          },
+          {
+            internalType: "address",
+            name: "owner",
+            type: "address"
+          }
+        ],
+        internalType: "struct Cell[]",
+        name: "",
+        type: "tuple[]"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
+    inputs: [],
+    name: "getEnemyDeck",
+    outputs: [
+      {
+        internalType: "uint8[]",
+        name: "",
+        type: "uint8[]"
+      }
+    ],
+    stateMutability: "view",
+    type: "function"
+  },
+  {
     inputs: [
       {
         components: [
