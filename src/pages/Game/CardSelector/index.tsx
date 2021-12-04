@@ -6,12 +6,14 @@ import Button from "components/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setStage, STAGES } from "store/reducers/game";
 import { RootState } from "store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function CardSelector() {
   const { GodContract } = useSelector((state: RootState) => state.contracts);
   const { signer } = useSelector((state: RootState) => state.account);
   const dispatch = useDispatch();
+
+  const [numberOfCards, setNumberOfCards] = useState([]);
 
   useEffect(() => {
     if (!GodContract || !signer) return;
@@ -21,6 +23,7 @@ function CardSelector() {
       const numbers = res.map((item: any) => {
         return item.toNumber();
       });
+      setNumberOfCards(numbers);
       console.log(numbers);
     }
     fetchData();
@@ -33,14 +36,6 @@ function CardSelector() {
       </Typography>
       <div className={styles.cardsWrapper}>
         <div className={styles.cards}>
-          <Card className={styles.eachCard} draggable />
-          <Card className={styles.eachCard} draggable />
-          <Card className={styles.eachCard} draggable />
-          <Card className={styles.eachCard} draggable />
-          <Card className={styles.eachCard} draggable />
-          <Card className={styles.eachCard} draggable />
-          <Card className={styles.eachCard} draggable />
-          <Card className={styles.eachCard} draggable />
           <Card className={styles.eachCard} draggable />
           <Card className={styles.eachCard} draggable />
           <Card className={styles.eachCard} draggable />

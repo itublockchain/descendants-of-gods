@@ -55,15 +55,44 @@
   left: 50%;
   transform: translateX(-50%) translateY(-50%);
 
-  & .greek1 {
-    position: absolute;
-    left: 58%;
-    transform: translateX(-50%) scale(0.9);
-    transition: transform 0.1s;
-    &:hover {
+  .small-map--container {
+    width: 316px;
+    height: 356px;
+    position: relative;
+    transform: scale(1.89) translateX(-50%);
+    left: 50%;
+    transform-origin: top left;
+    & .greek {
+      position: absolute;
       transition: transform 0.1s;
-      transform: translateX(-50%) scale(1);
-      cursor: pointer;
+      &:hover {
+        transition: transform 0.1s;
+        cursor: pointer;
+      }
+    }
+
+    & .greek1 {
+      left: 133px;
+    }
+
+    & .greek2 {
+      left: 106px;
+      top: 95px;
+    }
+
+    & .greek3 {
+      left: 0px;
+      top: 114px;
+    }
+
+    & .greek4 {
+      left: 99px;
+      top: 195px;
+    }
+
+    & .greek5 {
+      left: 203px;
+      top: 96px;
     }
   }
 }
