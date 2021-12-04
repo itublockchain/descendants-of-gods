@@ -15,6 +15,9 @@ function Matching() {
         <span className={styles.hint} ref={hintRef}>
           Merhaba dünya
         </span>
+        <div className={styles["progress-bar--wrapper"]}>
+          <div className={styles["progress-bar"]}></div>
+        </div>
       </div>
     </div>
   );
