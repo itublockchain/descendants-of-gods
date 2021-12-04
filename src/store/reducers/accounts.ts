@@ -25,10 +25,11 @@ export const accountSlicer = createSlice({
       state.address = action.payload;
     },
     setAccountData(state, action) {
-      const { address, provider, signedIn } = action.payload;
+      const { address, provider, signedIn, signer } = action.payload;
       state.address = address;
       state.provider = provider;
       state.signedIn = signedIn;
+      state.signer = signer;
     }
   }
 });
