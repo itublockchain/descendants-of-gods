@@ -5,7 +5,7 @@ import { clsnm } from "utils/clsnm";
 import styles from "./Button.module.scss";
 
 type ButtonProps = {
-  onClick: MouseEventHandler;
+  onClick?: MouseEventHandler;
   className?: string;
   children: ReactNode;
   size?: "small" | "medium" | "large" | "xlarge";

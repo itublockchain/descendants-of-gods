@@ -15,7 +15,7 @@ const AVALANCHE_NETWORK = {
   id: "0xa869",
   name: "Avalanche Fuji C Chain",
   rpcUrls: ["https://api.avax-test.network/ext/bc/C/rpc"],
-  nativeCurrency: { name: "AVAX", decimals: 18, symbol: "AVAX" },
+  nativeCurrency: { name: "AVAX", decimals: 18, symbol: "AVAX" }
 };
 
 export default function useRequestAccounts() {

@@ -6,7 +6,7 @@ declare const window: Window & WindowInterface;
 export const checkIfRightNetwork = async (network: any) => {
   if (!window.ethereum) return;
   const networkId = await window.ethereum.request({
-    method: "eth_chainId",
+    method: "eth_chainId"
   });
 
   if (networkId !== network.id) {
@@ -15,7 +15,7 @@ export const checkIfRightNetwork = async (network: any) => {
     try {
       await window.ethereum.request({
         method: "wallet_switchEthereumChain",
-        params: [{ chainId: network.id }],
+        params: [{ chainId: network.id }]
       });
     } catch (error: any) {
       // This error code indicates that the chain has not been added to MetaMask.
@@ -30,9 +30,9 @@ export const checkIfRightNetwork = async (network: any) => {
                 chainId: network.id,
                 rpcUrls: network.rpcUrls,
                 nativeCurrency: network.nativeCurrency,
-                chainName: network.name,
-              },
-            ],
+                chainName: network.name
+              }
+            ]
           });
         } catch (addError) {
           console.log("[DEBUG] Network Add error", addError);
