@@ -18,6 +18,8 @@ export default function useRequestAccounts() {
         "any"
       );
       await window.ethereum.enable();
+
+      await provider.send("eth_requestAccounts", []);
       let signer = await provider.getSigner();
       const address = await signer.getAddress();
 

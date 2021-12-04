@@ -1,5 +1,4 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CARD } from "store/reducers/cards";
 
 type MarketPlaceState = {
   cards: string[];

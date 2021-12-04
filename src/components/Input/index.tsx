@@ -25,16 +25,19 @@ interface InputProps {
 }
 
 const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({
-    onChange,
-    value,
-    inputProps,
-    containerClassname,
-    className,
-    icon,
-    placeholder = "Enter value",
-    ...props
-  }: InputProps) => {
+  (
+    {
+      onChange,
+      value,
+      inputProps,
+      containerClassname,
+      className,
+      icon,
+      placeholder = "Enter value",
+      ...props
+    }: InputProps,
+    ref
+  ) => {
     return (
       <div className={clsnm(styles.container, containerClassname)} {...props}>
         {icon && (

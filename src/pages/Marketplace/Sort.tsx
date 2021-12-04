@@ -35,8 +35,9 @@ const Sort = () => {
       </Typography>
 
       <div className={styles.badges}>
-        {cards.map((item) => (
+        {cards.map((item, index) => (
           <Badge
+            key={index}
             onClick={() => dispatch(toggleSelect(item))}
             className={clsnm(
               styles.badge,
