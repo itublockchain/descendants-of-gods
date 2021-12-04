@@ -9,6 +9,7 @@ import { Fragment, useEffect, useState } from "react";
 import CardWrapper from "components/CardWrapper";
 import { useRequest } from "hooks/useRequest";
 import { ethers } from "ethers";
+import { resolver } from "utils/resolver";
 
 function CardSelector() {
   const { GodContract, MatchMakerContract, SonsContract } = useSelector(
@@ -23,17 +24,9 @@ function CardSelector() {
 
   const [selectedDeck, setSelectedDeck] = useState([-1, -1, -1, -1, -1]);
 
-  const joinMatchReq = useRequest(
-    () => MatchMakerContract.connect(signer).registerToMatch(1, selectedDeck),
-    {
-      onSuccess: (res) => {
-        dispatch(setStage(STAGES.MatchPlayers));
-      },
-      onFail: (err) => {
-        console.log(err);
-      }
-    }
-  );
+  const joinMatchReq = async () => {
+    await MatchMakerContract.connect(signer).registerToMatch(1, selectedDeck);
+  };
 
   useEffect(() => {
     if (!GodContract || !signer) return;
@@ -49,53 +42,31 @@ function CardSelector() {
     fetchData();
   }, [GodContract, signer, MatchMakerContract]);
 
-  useEffect(() => {
-    const joinMatch = async () => {
-      if (MatchMakerContract) {
-        const [isPlayerInBoard, address] =
-          await MatchMakerContract.arenaToPlayer(1);
-
-        if (isPlayerInBoard && address === signerAddress) {
-          dispatch(setStage(STAGES.MatchPlayers));
-        }
-      }
-    };
-    joinMatch();
-  }, [MatchMakerContract]);
-
   const enterMatch = async () => {
     if (selectedDeck.includes(-1)) {
       alert("Select 5 cards");
       return;
     }
-    const [isPlayerInBoard, address] = await MatchMakerContract.arenaToPlayer(
-      1
+
+    const item = ethers.utils.parseEther("999999999999999");
+    await SonsContract.connect(signer).approve(
+      MatchMakerContract.address,
+      item
     );
 
-    if (!isPlayerInBoard) {
-      const item = ethers.utils.parseEther("999999999999999");
-      await SonsContract.connect(signer).approve(
-        MatchMakerContract.address,
-        item
-      );
-      joinMatchReq.exec();
-    } else {
-      dispatch(setStage(STAGES.MatchPlayers));
-    }
+    try {
+      await resolver({
+        contract: MatchMakerContract,
+        eventName: "GameStarted",
+        promise: joinMatchReq
+      });
+      dispatch(setStage(STAGES.InGame));
+    } catch (err) {}
   };
 
   useEffect(() => {
     dispatch(setSelectedCards(selectedDeck));
   }, [selectedDeck]);
-
-  useEffect(() => {
-    if (MatchMakerContract) {
-      MatchMakerContract.on("WaitingLeave", () => {
-        console.log("leave");
-        dispatch(setStage(STAGES.SelectMap));
-      });
-    }
-  }, [MatchMakerContract]);
 
   return (
     <div className={styles.wrapper}>
@@ -137,11 +108,7 @@ function CardSelector() {
         ))}
       </div>
 
-      <Button
-        loading={joinMatchReq.status.isPending}
-        onClick={enterMatch}
-        size="large"
-      >
+      <Button onClick={enterMatch} size="large">
         Enter Match
       </Button>
     </div>

@@ -7,35 +7,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
 import Typography from "components/Typography";
 import Button from "components/Button";
-import { setStage, STAGES } from "store/reducers/game";
-import { setSonsContract } from "store/reducers/contracts";
-import { useNavigate } from "react-router";
 
 function Matching({ setIsMatched }: any) {
   const hintRef: any = useRef();
 
-  const { signer } = useSelector((state: RootState) => state.account);
+  const { signer, address: signerAddress } = useSelector(
+    (state: RootState) => state.account
+  );
   const { MatchMakerContract } = useSelector(
     (state: RootState) => state.contracts
   );
 
-  const dispatch = useDispatch();
-  const leaveGame = async () => {
-    await MatchMakerContract.connect(signer).leaveGame(1);
-  };
-
-  useEffect(() => {
-    if (MatchMakerContract) {
-      MatchMakerContract.on("WaitingLeave", (game: any, address: any) => {
-        dispatch(setStage(STAGES.SelectMap));
-      });
-    }
-    if (MatchMakerContract) {
-      MatchMakerContract.on("GameStarted", (game: any, instance: any) => {
-        dispatch(setStage(STAGES.InGame));
-      });
-    }
-  }, [MatchMakerContract]);
+  MatchMakerContract.on("GameStarted", () => {
+    console.log("hello");
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -50,9 +35,7 @@ function Matching({ setIsMatched }: any) {
         >
           Waiting another player to join
           <Button
-            onClick={async () => {
-              await leaveGame();
-            }}
+            onClick={async () => null}
             size="large"
             className={styles.button}
           >
