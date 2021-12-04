@@ -12,7 +12,13 @@ type CardProps = {
   draggable?: boolean;
 };
 
-const Card = ({ className, hoverable, rotate, draggable }: CardProps) => {
+const Card = ({
+  className,
+  hoverable,
+  rotate,
+  draggable,
+  ...rest
+}: CardProps) => {
   const { layout } = useSelector((state: RootState) => state.game);
 
   const [{ isDragging, isDraggable }, drag] = useDrag({
@@ -34,6 +40,7 @@ const Card = ({ className, hoverable, rotate, draggable }: CardProps) => {
         rotate && styles.rotate,
         className
       )}
+      {...rest}
     ></div>
   );
 };
