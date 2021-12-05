@@ -46,9 +46,9 @@ const Header = () => {
   return (
     <header ref={ref} className={styles.header}>
       <div className={styles.logoWrapper}>
-        <div>
+        <Link to="/">
           <img src={Image} className={styles.logoImage} />
-        </div>
+        </Link>
         {!pathname?.includes("game") && (
           <div className={styles.links}>
             <Link className={styles.link} to="/market">
