@@ -1,4 +1,5 @@
 .header {
+  z-index: 1;
   display: flex;
   position: fixed;
   top: 0;
@@ -41,10 +42,13 @@
 }
 
 .link {
-  color: var(--text-color);
+  color: #3a1c0a;
   text-decoration: none;
 
   &:hover {
     text-decoration: underline;
   }
+}
+.logoImage {
+  width: 112px;
 }

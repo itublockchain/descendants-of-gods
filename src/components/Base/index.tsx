@@ -14,7 +14,7 @@ type BaseProps = {
 const Base = ({ position, player }: BaseProps) => {
   const cardHoverable = position === "bottom";
 
-  const { selectedCards, enemyCards, playedCards, moveStack } = useSelector(
+  const { selectedCards, enemyCards, playedCards, order } = useSelector(
     (state: RootState) => state.game
   );
 
@@ -30,7 +30,7 @@ const Base = ({ position, player }: BaseProps) => {
           }
 
           return (
-            <div className={styles.card}>
+            <div className={clsnm(styles.card)}>
               <Card
                 index={item}
                 type="bottom"
@@ -55,10 +55,11 @@ const Base = ({ position, player }: BaseProps) => {
             <div className={styles.card}>
               <Card
                 rotate
+                index={item.id}
                 hoverable={cardHoverable}
                 style={{
                   backgroundImage: `url(${
-                    CARD[item as "0" | "1" | "2" | "3" | "4"]?.img
+                    CARD[item.id as "0" | "1" | "2" | "3" | "4"]?.img
                   })`
                 }}
               />

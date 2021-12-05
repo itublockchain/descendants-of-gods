@@ -18,6 +18,10 @@ $border: 2px solid white;
     border-right: $border;
   }
 
+  &.mine {
+    background-color: rgb(99, 99, 255) !important;
+  }
+
   &.over {
     background-color: yellow !important;
     opacity: 0.5;
@@ -39,5 +43,30 @@ $border: 2px solid white;
   }
   &.border-bottom-right {
     border-bottom-right-radius: 8px;
+  }
+}
+
+.data {
+  position: absolute;
+}
+
+.cellCard {
+  transform: scale(0.75);
+  bottom: 20px;
+}
+
+.meta {
+  position: absolute;
+
+  &.health {
+    color: maroon;
+    bottom: 4px;
+    right: -18px;
+  }
+
+  &.damage {
+    color: black;
+    bottom: 4px;
+    left: -18px;
   }
 }

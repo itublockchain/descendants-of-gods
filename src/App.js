@@ -9,10 +9,15 @@ import { useEffect } from "react";
 import useRequestAccounts from "hooks/useRequestAccounts";
 import { useSelector } from "react-redux";
 import io from "socket.io-client";
+import { uuid } from "uuidv4";
 
 const App = () => {
   const { requestAccounts } = useRequestAccounts();
   const { address } = useSelector((state) => state.account);
+
+  useEffect(() => {
+    sessionStorage.setItem("tab", uuid());
+  }, []);
 
   useEffect(() => {
     async function fetchData() {
@@ -22,7 +27,6 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    console.log(address);
     if (window.socket) {
       return;
     }

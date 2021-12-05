@@ -11,11 +11,6 @@ const Board = () => {
   const { rows, columns } = table || { rows: 5, columns: 5 };
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const items = arrToObj(cellInfo);
-    dispatch(setCell(items));
-  }, []);
-
   return (
     <div>
       {cellInfo.map((item: any, rindex: any) => (

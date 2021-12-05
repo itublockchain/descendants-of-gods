@@ -134,7 +134,10 @@ function CardSelector() {
         >
           Go back
         </Button>
-        <Button onClick={enterMatch} size="large">
+        <Button
+          onClick={() => dispatch(setStage(STAGES.MatchPlayers))}
+          size="large"
+        >
           Enter Match
         </Button>
       </div>

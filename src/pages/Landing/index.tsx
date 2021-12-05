@@ -10,7 +10,6 @@ const Landing = () => {
       <Header />
       <LandingHero />
       <Ecosystem />
-      <Footer />
     </div>
   );
 };

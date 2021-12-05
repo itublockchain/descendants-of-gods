@@ -7,13 +7,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "store";
 import Typography from "components/Typography";
 import Button from "components/Button";
+import { setStage, STAGES } from "store/reducers/game";
 
 function Matching({ setIsMatched }: any) {
   const hintRef: any = useRef();
+  const dispatch = useDispatch();
 
   const { signer, address: signerAddress } = useSelector(
     (state: RootState) => state.account
   );
+
+  useEffect(() => {
+    setTimeout(() => {
+      dispatch(setStage(STAGES.InGame));
+    }, 4000);
+  }, []);
 
   return (
     <div className={styles.wrapper}>

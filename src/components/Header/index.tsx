@@ -10,6 +10,9 @@ import { RootState } from "store";
 import useRequestAccounts from "hooks/useRequestAccounts";
 import { Link } from "react-router-dom";
 import Typography from "components/Typography";
+import Image from "assets/images/landing/logo.png";
+import { useLocation } from "react-router";
+import { STAGES } from "store/reducers/game";
 
 const Header = () => {
   const ref = React.useRef<HTMLDivElement>(null);
@@ -17,6 +20,8 @@ const Header = () => {
   const { signedIn, address } = useSelector(
     (state: RootState) => state.account
   );
+  const { stage } = useSelector((state: RootState) => state.game);
+  const { pathname } = useLocation();
   const length = address?.length;
 
   const { requestAccounts }: any = useRequestAccounts();
@@ -41,40 +46,51 @@ const Header = () => {
   return (
     <header ref={ref} className={styles.header}>
       <div className={styles.logoWrapper}>
-        <div>Logo field</div>
-        <div className={styles.links}>
-          <Link className={styles.link} to="/market">
-            <Typography variant="body1" weight="medium">
-              Marketplace
-            </Typography>
-          </Link>
+        <div>
+          <img src={Image} className={styles.logoImage} />
         </div>
-      </div>
-      <div className={styles.menu}>
-        {signedIn === false ? (
-          <Button
-            onClick={async () => await requestAccounts()}
-            className={styles.connect}
-          >
-            <Icon>
-              <ConnectIcon />
-            </Icon>
-          </Button>
-        ) : (
-          <Button onClick={() => null} className={styles.connect}>
-            <Icon className={styles.icon}>
-              <UserIcon />
-            </Icon>
-            <span>
-              {address?.substring(0, 5)}...
-              {address?.substring(length - 5, length)}
-            </span>
-          </Button>
+        {!pathname?.includes("game") && (
+          <div className={styles.links}>
+            <Link className={styles.link} to="/market">
+              <Typography variant="body1" weight="medium">
+                Marketplace
+              </Typography>
+            </Link>
+          </div>
         )}
-        <Button onClick={() => navigate("/game")} type="secondary">
-          Launch Game
-        </Button>
       </div>
+      {pathname.includes("game") && stage === STAGES.InGame && (
+        <div className={styles.menu}>
+          <Button>Loan</Button>
+        </div>
+      )}
+      {!pathname.includes("game") && (
+        <div className={styles.menu}>
+          {signedIn === false ? (
+            <Button
+              onClick={async () => await requestAccounts()}
+              className={styles.connect}
+            >
+              <Icon>
+                <ConnectIcon />
+              </Icon>
+            </Button>
+          ) : (
+            <Button onClick={() => null} className={styles.connect}>
+              <Icon className={styles.icon}>
+                <UserIcon />
+              </Icon>
+              <span>
+                {address?.substring(0, 5)}...
+                {address?.substring(length - 5, length)}
+              </span>
+            </Button>
+          )}
+          <Button onClick={() => navigate("/game")} type="secondary">
+            Launch Game
+          </Button>
+        </div>
+      )}
     </header>
   );
 };

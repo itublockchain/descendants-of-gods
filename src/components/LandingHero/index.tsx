@@ -19,11 +19,11 @@ const LandingHero = () => {
 
   return (
     <div className={styles["hero-container"]}>
-      <h1>NFTs thrive here.</h1>
-      <p>
-        SuperFarm is a passionate community building at the intersection of NFTs
-        and DeFi.
-      </p>
+      <h1>
+        Descendants of God is a decentralized, strategic, PvP card game
+        universe.
+      </h1>
+      <p>Multiconceptual universe for multiplayer board games</p>
       <Button achilles type="secondary" size="large">
         Launch Game
       </Button>

@@ -1,8 +1,6 @@
 // @ts-ignore
 import Base from "components/Base";
 import Board from "components/Board";
-import Card from "components/Card";
-import { LAYOUT } from "common/constants/layout";
 import { RootState } from "store";
 import { clsnm } from "utils/clsnm";
 import styles from "./Game.module.scss";
@@ -12,10 +10,16 @@ import { useEffect, useState } from "react";
 import AreaSelector from "pages/Game/AreaSelector";
 import Matching from "./Matching";
 import CardSelector from "./CardSelector";
-import { setEnemyCards, setMoveStack, STAGES } from "store/reducers/game";
-import Button from "components/Button";
-import CardWrapper from "components/CardWrapper";
-import { CARD } from "store/reducers/cards";
+import {
+  setCell,
+  setEnemyCards,
+  setOrder,
+  STAGES,
+  updateCell
+} from "store/reducers/game";
+import Header from "components/Header";
+
+declare const window: Window & any;
 
 const Game = () => {
   const accountState = useSelector((state: RootState) => state.account);
@@ -24,6 +28,12 @@ const Game = () => {
   );
   const { ClashContract } = useSelector((state: RootState) => state.contracts);
   const dispatch = useDispatch();
+  useEffect(() => {
+    window?.socket?.on("move", (msg: any) => {
+      dispatch(setCell(msg.table));
+      dispatch(setOrder(msg.order));
+    });
+  }, [window.socket]);
 
   useEffect(() => {
     if (!ClashContract) return;
@@ -58,6 +68,7 @@ const Game = () => {
 
   return (
     <div className={clsnm(styles.container, styles.wrapper)}>
+      <Header />
       <div className={styles.game}>
         <Base position="top" />
         <div className={styles.boardWrapper}>
@@ -65,40 +76,6 @@ const Game = () => {
         </div>
         <Base position="bottom" />
       </div>
-      {layout === LAYOUT.collapsed && (
-        <div className={clsnm(styles.cards)}>
-          {moveStack.map((item: any) => (
-            <div className={styles.card}>
-              <Card
-                style={{
-                  backgroundImage: `url(${
-                    //@ts-ignore
-                    CARD[item.cardId]?.img
-                  })`,
-                  backgroundSize: "cover"
-                }}
-                className={styles.stackCard}
-                index={item.cardId}
-              />
-            </div>
-          ))}
-          {moveStack.length !== 0 && (
-            <Button
-              onClick={() => {
-                const newMove = [...moveStack];
-                newMove.pop();
-                dispatch(setMoveStack(newMove));
-              }}
-              type="secondary"
-              className={styles.pop}
-            >
-              Pop
-            </Button>
-          )}
-
-          <Button className={styles.approve}>Approve</Button>
-        </div>
-      )}
     </div>
   );
 };
