@@ -49,6 +49,7 @@ function CardSelector() {
   }, [GodContract, signer, MatchMakerContract]);
 
   const enterMatch = async () => {
+    /*
     if (selectedDeck.includes(-1)) {
       alert("Select 5 cards");
       return;
@@ -80,7 +81,7 @@ function CardSelector() {
       dispatch(setStage(STAGES.InGame));
     } catch (err) {
       alert(err);
-    }
+    }*/
   };
 
   useEffect(() => {
