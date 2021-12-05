@@ -14,13 +14,18 @@ type BaseProps = {
 const Base = ({ position, player }: BaseProps) => {
   const cardHoverable = position === "bottom";
 
-  const { selectedCards } = useSelector((state: RootState) => state.game);
+  const { selectedCards, enemyCards, playedCards, moveStack } = useSelector(
+    (state: RootState) => state.game
+  );
 
   return (
     <div className={clsnm(styles.base, styles[position])}>
       {position === "bottom" &&
         selectedCards.map((item: any) => {
           if (item === -1) {
+            return <></>;
+          }
+          if (playedCards.includes(item)) {
             return <></>;
           }
 
@@ -40,25 +45,26 @@ const Base = ({ position, player }: BaseProps) => {
             </div>
           );
         })}
-      {position === "top" && (
-        <>
-          <div className={styles.card}>
-            <Card rotate hoverable={cardHoverable} />
-          </div>
-          <div className={styles.card}>
-            <Card rotate hoverable={cardHoverable} />
-          </div>
-          <div className={styles.card}>
-            <Card rotate hoverable={cardHoverable} />
-          </div>
-          <div className={styles.card}>
-            <Card rotate hoverable={cardHoverable} />
-          </div>
-          <div className={styles.card}>
-            <Card rotate hoverable={cardHoverable} />
-          </div>
-        </>
-      )}
+      {position === "top" &&
+        enemyCards.map((item: any) => {
+          if (item === -1) {
+            return <></>;
+          }
+
+          return (
+            <div className={styles.card}>
+              <Card
+                rotate
+                hoverable={cardHoverable}
+                style={{
+                  backgroundImage: `url(${
+                    CARD[item as "0" | "1" | "2" | "3" | "4"]?.img
+                  })`
+                }}
+              />
+            </div>
+          );
+        })}
     </div>
   );
 };

@@ -13,6 +13,7 @@ type CardProps = {
   index?: number;
   style?: any;
   type?: "top" | "bottom";
+  stackItem?: any;
 };
 
 const Card = ({
@@ -23,6 +24,7 @@ const Card = ({
   index,
   style,
   type = "top",
+  stackItem,
   ...rest
 }: CardProps) => {
   const { layout } = useSelector((state: RootState) => state.game);

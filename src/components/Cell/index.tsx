@@ -3,7 +3,8 @@ import { clsnm } from "utils/clsnm";
 import { cornerClassGenerator } from "utils/cornerClassGenerator";
 import styles from "./Cell.module.scss";
 import { useDrop } from "react-dnd";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { playCard, setCell, updateCell } from "store/reducers/game";
 
 type CellProps = {
   row: number;
@@ -15,6 +16,7 @@ const Cell = ({ row, column, item }: CellProps) => {
   const { table, playedCards, moveStack, cellInfo, energy } = useSelector(
     (state: RootState) => state.game
   );
+  const dispatch = useDispatch();
   const borderClass =
     cornerClassGenerator({
       row,
@@ -31,6 +33,15 @@ const Cell = ({ row, column, item }: CellProps) => {
         if (!playedCards.includes(item.index) && 4 - row !== 0) {
           alert("Play to first row!");
         } else {
+          if (4 - row === 0) {
+            dispatch(
+              playCard({
+                i: 4 - row,
+                j: column,
+                cardId: item.index
+              })
+            );
+          }
         }
       }
     },

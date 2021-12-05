@@ -8,16 +8,20 @@ import { RootState } from "store";
 import { Fragment, useEffect, useState } from "react";
 import CardWrapper from "components/CardWrapper";
 import { useRequest } from "hooks/useRequest";
+import { clashABI } from "abi";
 import { ethers } from "ethers";
 import { resolver } from "utils/resolver";
+import { setClashContract } from "store/reducers/contracts";
 
 function CardSelector() {
   const { GodContract, MatchMakerContract, SonsContract } = useSelector(
     (state: RootState) => state.contracts
   );
-  const { signer, address: signerAddress } = useSelector(
-    (state: RootState) => state.account
-  );
+  const {
+    signer,
+    address: signerAddress,
+    provider
+  } = useSelector((state: RootState) => state.account);
   const dispatch = useDispatch();
   const [cards, setCards] = useState([]);
   const [oldCards, setOldCards] = useState([]);
@@ -25,7 +29,9 @@ function CardSelector() {
   const [selectedDeck, setSelectedDeck] = useState([-1, -1, -1, -1, -1]);
 
   const joinMatchReq = async () => {
-    await MatchMakerContract.connect(signer).registerToMatch(1, selectedDeck);
+    await MatchMakerContract.connect(signer).registerToMatch(1, selectedDeck, {
+      gasLimit: "2000000"
+    });
   };
 
   useEffect(() => {
@@ -51,7 +57,8 @@ function CardSelector() {
     const item = ethers.utils.parseEther("999999999999999");
     await SonsContract.connect(signer).approve(
       MatchMakerContract.address,
-      item
+      item,
+      { gasLimit: "2000000" }
     );
 
     try {
@@ -60,7 +67,16 @@ function CardSelector() {
         eventName: "GameStarted",
         promise: joinMatchReq,
         onStart: () => dispatch(setStage(STAGES.MatchPlayers))
-      });
+      })
+        .then(([gameId, address]: any) => {
+          const ClashContract = new ethers.Contract(
+            address,
+            clashABI,
+            provider
+          );
+          dispatch(setClashContract(ClashContract));
+        })
+        .catch((err) => console.log(err));
       dispatch(setStage(STAGES.InGame));
     } catch (err) {
       alert(err);

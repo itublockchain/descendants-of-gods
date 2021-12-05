@@ -31,13 +31,15 @@
 
 .cards {
   align-items: center;
+  display: flex;
   flex-direction: column;
   height: 100vh;
   width: 25%;
-  background-color: red;
+  background-color: transparent;
   overflow: auto;
   padding: 1rem;
-  align-items: center;
+  border-left: 2px solid var(--primary-500);
+  justify-content: flex-end;
 
   & .card:not(:last-child) {
     margin-bottom: 1rem;
@@ -45,5 +47,31 @@
 
   &.collaped {
     display: none;
+  }
+}
+
+.approve {
+  display: block;
+  width: 100%;
+  & span {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+  }
+}
+
+.stackCard {
+  width: 100px !important;
+  height: 135px !important;
+}
+
+.pop {
+  display: block;
+  width: 100%;
+  margin-bottom: 0.5rem;
+  & span {
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
   }
 }

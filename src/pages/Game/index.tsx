@@ -6,19 +6,35 @@ import { LAYOUT } from "common/constants/layout";
 import { RootState } from "store";
 import { clsnm } from "utils/clsnm";
 import styles from "./Game.module.scss";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Onboarding from "pages/Game/Onboarding";
 import { useEffect, useState } from "react";
 import AreaSelector from "pages/Game/AreaSelector";
 import Matching from "./Matching";
 import CardSelector from "./CardSelector";
-import { STAGES } from "store/reducers/game";
+import { setEnemyCards, setMoveStack, STAGES } from "store/reducers/game";
+import Button from "components/Button";
+import CardWrapper from "components/CardWrapper";
+import { CARD } from "store/reducers/cards";
 
 const Game = () => {
   const accountState = useSelector((state: RootState) => state.account);
-  const { layout, ...gameState } = useSelector(
+  const { layout, moveStack, ...gameState } = useSelector(
     (state: RootState) => state.game
   );
+  const { ClashContract } = useSelector((state: RootState) => state.contracts);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (!ClashContract) return;
+
+    async function fetchData() {
+      const res = await ClashContract.getEnemyDeck();
+      console.log("enemy cards:", res);
+      dispatch(setEnemyCards(res));
+    }
+    fetchData();
+  }, [ClashContract]);
 
   if (accountState.signedIn === null) {
     return null;
@@ -49,11 +65,38 @@ const Game = () => {
         </div>
         <Base position="bottom" />
       </div>
-      {layout === LAYOUT.expanded && (
+      {layout === LAYOUT.collapsed && (
         <div className={clsnm(styles.cards)}>
-          <div className={styles.card}>
-            <Card />
-          </div>
+          {moveStack.map((item: any) => (
+            <div className={styles.card}>
+              <Card
+                style={{
+                  backgroundImage: `url(${
+                    //@ts-ignore
+                    CARD[item.cardId]?.img
+                  })`,
+                  backgroundSize: "cover"
+                }}
+                className={styles.stackCard}
+                index={item.cardId}
+              />
+            </div>
+          ))}
+          {moveStack.length !== 0 && (
+            <Button
+              onClick={() => {
+                const newMove = [...moveStack];
+                newMove.pop();
+                dispatch(setMoveStack(newMove));
+              }}
+              type="secondary"
+              className={styles.pop}
+            >
+              Pop
+            </Button>
+          )}
+
+          <Button className={styles.approve}>Approve</Button>
         </div>
       )}
     </div>

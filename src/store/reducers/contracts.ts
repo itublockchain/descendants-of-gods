@@ -10,6 +10,7 @@ type ContractState = {
   BiliraContract: any;
   SonsContract: any;
   XpContract: any;
+  ClashContract: any;
 };
 
 const initialState: ContractState = {
@@ -21,7 +22,8 @@ const initialState: ContractState = {
   ArenaContract: null,
   BiliraContract: null,
   SonsContract: null,
-  XpContract: null
+  XpContract: null,
+  ClashContract: null
 };
 
 export const contractSlicer = createSlice({
@@ -55,6 +57,9 @@ export const contractSlicer = createSlice({
     setXpContract(state, action) {
       state.XpContract = action.payload;
     },
+    setClashContract(state, action) {
+      state.ClashContract = action.payload;
+    },
     setContractData(state, action) {
       state.GodContract = action.payload.GodContract;
       state.BoardContract = action.payload.BoardContract;
@@ -79,7 +84,8 @@ export const {
   setBiliraContract,
   setSonsContract,
   setXpContract,
-  setContractData
+  setContractData,
+  setClashContract
 } = contractSlicer.actions;
 
 export default contractSlicer.reducer;

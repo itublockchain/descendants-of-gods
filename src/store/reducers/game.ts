@@ -14,7 +14,8 @@ type GameState = {
     rows: number;
     columns: number;
   };
-  selectedCards: Array<any>;
+  selectedCards: any;
+  enemyCards: any;
   stage: STAGES;
   playedCards: any;
   moveStack: any;
@@ -33,34 +34,14 @@ const initialState: GameState = {
   stage: STAGES.InGame,
   moveStack: [],
   cellInfo: [
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null],
-    [false, null, null, null, null]
+    [null, null, null, null, null],
+    [null, null, null, null, null],
+    [null, null, null, null, null],
+    [null, null, null, null, null],
+    [null, null, null, null, null]
   ],
-  energy: 3
-  //  moveStack: [{origin:, target, id}]
+  energy: 3,
+  enemyCards: []
 };
 
 export const gameSlice = createSlice({
@@ -74,19 +55,46 @@ export const gameSlice = createSlice({
     setSelectedCards(state, action) {
       state.selectedCards = action.payload;
     },
+    setPlayedCards: (state, action) => {
+      state.playedCards = action.payload;
+    },
     playCard: (state, action) => {
       const { i, j, cardId } = action.payload;
       if (!state.playedCards.includes(i)) {
         state.playedCards.push(cardId);
+        state.moveStack.push({
+          origin: [-1, -1],
+          target: [i, j],
+          cardId: cardId
+        });
+      } else {
       }
+    },
+    updateCell: (state, action) => {
+      const { i, j, item } = action.payload;
+      state.cellInfo[i][j] = item;
     },
     setCell: (state, action) => {
       state.cellInfo = action.payload;
+    },
+    setEnemyCards(state, action) {
+      state.enemyCards = action.payload;
+    },
+    setMoveStack: (state, action) => {
+      state.moveStack = action.payload;
     }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { setStage, setSelectedCards, setCell } = gameSlice.actions;
+export const {
+  setStage,
+  setSelectedCards,
+  setCell,
+  setEnemyCards,
+  updateCell,
+  playCard,
+  setMoveStack
+} = gameSlice.actions;
 
 export default gameSlice.reducer;
